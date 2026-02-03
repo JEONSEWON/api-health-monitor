@@ -137,13 +137,43 @@ alembic upgrade head
 pytest
 ```
 
+## 🚀 Run Celery Worker
+
+Celery handles background tasks (health checks, alerts).
+
+### Terminal 1: Run FastAPI
+
+```bash
+cd backend
+python -m app.main
+```
+
+### Terminal 2: Run Celery Worker & Beat
+
+```bash
+cd backend
+./run_celery.sh
+```
+
+Or manually:
+
+```bash
+# Worker
+celery -A app.celery_app worker --loglevel=info
+
+# Beat (scheduler) - in another terminal
+celery -A app.celery_app beat --loglevel=info
+```
+
+---
+
 ## 📝 TODO
 
-- [ ] Monitor CRUD endpoints
+- [x] Monitor CRUD endpoints ✅
+- [x] Celery worker setup ✅
+- [x] Health check logic ✅
 - [ ] Alert channel endpoints
-- [ ] Celery worker setup
-- [ ] Health check logic
-- [ ] Alert sending logic
+- [ ] Alert sending logic (Email, Slack, etc.)
 - [ ] LemonSqueezy integration
 - [ ] Email notifications
 - [ ] Unit tests
@@ -158,13 +188,15 @@ pytest
 - `GET /api/auth/me` - Get current user
 - `POST /api/auth/logout` - Logout
 
-### Monitors (TODO)
+### Monitors ✅
 - `GET /api/monitors` - List monitors
 - `POST /api/monitors` - Create monitor
 - `GET /api/monitors/:id` - Get monitor
 - `PUT /api/monitors/:id` - Update monitor
 - `DELETE /api/monitors/:id` - Delete monitor
 - `GET /api/monitors/:id/checks` - Get check history
+- `POST /api/monitors/:id/pause` - Pause monitor
+- `POST /api/monitors/:id/resume` - Resume monitor
 
 ### Alert Channels (TODO)
 - `GET /api/alert-channels` - List channels
