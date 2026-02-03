@@ -209,6 +209,22 @@ celery -A app.celery_app beat --loglevel=info
 - `POST /api/alert-channels/:id/attach/:monitor_id` - Attach to monitor
 - `POST /api/alert-channels/:id/detach/:monitor_id` - Detach from monitor
 
+### Subscription ✅
+- `GET /api/subscription` - Get current subscription
+- `POST /api/subscription/checkout` - Create checkout (upgrade)
+- `POST /api/subscription/cancel` - Cancel subscription
+- `POST /api/subscription/webhooks/lemonsqueezy` - Webhook handler
+
+### Public (No Auth) ✅
+- `GET /api/public/status/:id` - Public status page
+- `GET /api/public/status/:id/badge` - Status badge data
+- `GET /api/public/status/:id/history` - Check history
+
+### Analytics ✅
+- `GET /api/analytics/overview` - Overall analytics
+- `GET /api/analytics/monitors/:id` - Monitor analytics
+- `GET /api/analytics/incidents` - All incidents
+
 ## 🌐 Environment Variables
 
 See `.env.example` for all configuration options.

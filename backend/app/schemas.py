@@ -149,6 +149,17 @@ class AlertChannelResponse(BaseModel):
 
 # ============== Subscription Schemas ==============
 
+class CheckoutRequest(BaseModel):
+    """Checkout request"""
+    plan: str = Field(pattern="^(starter|pro|business)$")
+
+
+class CheckoutResponse(BaseModel):
+    """Checkout response"""
+    checkout_url: str
+    plan: str
+
+
 class SubscriptionResponse(BaseModel):
     """Subscription response"""
     id: UUID
