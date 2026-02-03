@@ -172,10 +172,12 @@ celery -A app.celery_app beat --loglevel=info
 - [x] Monitor CRUD endpoints ✅
 - [x] Celery worker setup ✅
 - [x] Health check logic ✅
-- [ ] Alert channel endpoints
-- [ ] Alert sending logic (Email, Slack, etc.)
+- [x] Alert channel endpoints ✅
+- [x] Alert sending logic (Email, Slack, Telegram, Discord, Webhook) ✅
 - [ ] LemonSqueezy integration
-- [ ] Email notifications
+- [ ] Subscription management
+- [ ] Public status page
+- [ ] Analytics endpoints
 - [ ] Unit tests
 - [ ] Integration tests
 
@@ -198,11 +200,14 @@ celery -A app.celery_app beat --loglevel=info
 - `POST /api/monitors/:id/pause` - Pause monitor
 - `POST /api/monitors/:id/resume` - Resume monitor
 
-### Alert Channels (TODO)
+### Alert Channels ✅
 - `GET /api/alert-channels` - List channels
 - `POST /api/alert-channels` - Create channel
+- `GET /api/alert-channels/:id` - Get channel
 - `PUT /api/alert-channels/:id` - Update channel
 - `DELETE /api/alert-channels/:id` - Delete channel
+- `POST /api/alert-channels/:id/attach/:monitor_id` - Attach to monitor
+- `POST /api/alert-channels/:id/detach/:monitor_id` - Detach from monitor
 
 ## 🌐 Environment Variables
 

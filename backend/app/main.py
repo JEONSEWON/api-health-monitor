@@ -32,10 +32,11 @@ app.add_middleware(
 
 
 # Include routers
-from app.routers import monitors
+from app.routers import monitors, alert_channels
 
 app.include_router(auth.router, prefix="/api")
 app.include_router(monitors.router, prefix="/api")
+app.include_router(alert_channels.router, prefix="/api")
 
 
 @app.on_event("startup")

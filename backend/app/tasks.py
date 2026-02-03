@@ -168,8 +168,15 @@ def check_single_monitor(monitor_id: str):
 def send_alerts(monitor_id: str, new_status: str, old_status: str):
     """
     Send alerts when monitor status changes
-    TODO: Implement email, Slack, Telegram, etc.
     """
+    from app.alerts import (
+        send_email_alert,
+        send_slack_alert,
+        send_telegram_alert,
+        send_discord_alert,
+        send_webhook_alert
+    )
+    
     db = SessionLocal()
     
     try:
@@ -183,18 +190,58 @@ def send_alerts(monitor_id: str, new_status: str, old_status: str):
         # Get alert channels for this monitor
         alert_channels = monitor.alert_channels
         
+        sent_count = 0
+        
         for channel in alert_channels:
             if not channel.is_active:
                 continue
             
-            # TODO: Implement actual alert sending
-            print(f"   → Would send {channel.type} alert")
+            try:
+                success = False
+                
+                if channel.type == "email":
+                    success = send_email_alert(
+                        channel.config, monitor.name, monitor.url,
+                        new_status, old_status
+                    )
+                
+                elif channel.type == "slack":
+                    success = send_slack_alert(
+                        channel.config, monitor.name, monitor.url,
+                        new_status, old_status
+                    )
+                
+                elif channel.type == "telegram":
+                    success = send_telegram_alert(
+                        channel.config, monitor.name, monitor.url,
+                        new_status, old_status
+                    )
+                
+                elif channel.type == "discord":
+                    success = send_discord_alert(
+                        channel.config, monitor.name, monitor.url,
+                        new_status, old_status
+                    )
+                
+                elif channel.type == "webhook":
+                    success = send_webhook_alert(
+                        channel.config, monitor.name, monitor.url,
+                        new_status, old_status, str(monitor.id)
+                    )
+                
+                if success:
+                    sent_count += 1
+                    
+            except Exception as e:
+                print(f"❌ Failed to send {channel.type} alert: {str(e)}")
         
-        # For now, just log
+        print(f"✅ Sent {sent_count}/{len(alert_channels)} alerts")
+        
         return {
             "monitor_id": str(monitor.id),
-            "alert_sent": True,
-            "channels": len(alert_channels)
+            "alert_sent": sent_count > 0,
+            "channels": len(alert_channels),
+            "sent": sent_count
         }
         
     finally:
