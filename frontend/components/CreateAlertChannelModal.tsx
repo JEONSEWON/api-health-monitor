@@ -115,7 +115,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
                   placeholder="you@example.com"
                 />
               </div>
@@ -130,7 +130,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
                   required
                   value={slackWebhook}
                   onChange={(e) => setSlackWebhook(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
                   placeholder="https://hooks.slack.com/services/..."
                 />
                 <p className="text-xs text-gray-500 mt-1">
@@ -149,7 +149,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
                     required
                     value={telegramBotToken}
                     onChange={(e) => setTelegramBotToken(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600"
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
                     placeholder="123456:ABC-DEF1234ghIkl..."
                   />
                 </div>
@@ -160,7 +160,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
                     required
                     value={telegramChatId}
                     onChange={(e) => setTelegramChatId(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600"
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
                     placeholder="-1001234567890"
                   />
                 </div>
@@ -176,7 +176,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
                   required
                   value={discordWebhook}
                   onChange={(e) => setDiscordWebhook(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
                   placeholder="https://discord.com/api/webhooks/..."
                 />
               </div>
@@ -191,7 +191,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
                   required
                   value={webhookUrl}
                   onChange={(e) => setWebhookUrl(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
                   placeholder="https://your-server.com/webhook"
                 />
               </div>
@@ -202,7 +202,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
               <button
                 type="button"
                 onClick={handleClose}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+                className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-gray-900"
               >
                 Cancel
               </button>

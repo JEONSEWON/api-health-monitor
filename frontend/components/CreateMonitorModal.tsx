@@ -92,7 +92,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                 placeholder="Production API"
               />
             </div>
@@ -107,7 +107,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
                 required
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                 placeholder="https://api.example.com/health"
               />
             </div>
@@ -162,7 +162,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
                 max={120}
                 value={timeout}
                 onChange={(e) => setTimeout(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
               />
             </div>
 
@@ -177,7 +177,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
                 max={599}
                 value={expectedStatus}
                 onChange={(e) => setExpectedStatus(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
               />
             </div>
 
@@ -186,7 +186,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
               <button
                 type="button"
                 onClick={handleClose}
-                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-gray-900"
               >
                 Cancel
               </button>
