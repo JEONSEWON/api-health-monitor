@@ -120,7 +120,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
               <select
                 value={method}
                 onChange={(e) => setMethod(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 bg-white"
               >
                 <option value="GET">GET</option>
                 <option value="POST">POST</option>
@@ -138,7 +138,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
               <select
                 value={interval}
                 onChange={(e) => setInterval(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 bg-white"
               >
                 <option value={60}>1 minute</option>
                 <option value={300}>5 minutes (Free plan)</option>

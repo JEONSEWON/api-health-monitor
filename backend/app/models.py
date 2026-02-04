@@ -4,18 +4,21 @@ SQLAlchemy Database Models
 
 from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey, Text, JSON
 from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.postgresql import UUID
 from datetime import datetime
 import uuid
 
 from app.database import Base
+
+# Use String(36) for SQLite compatibility instead of UUID
+def generate_uuid():
+    return str(uuid.uuid4())
 
 
 class User(Base):
     """User model"""
     __tablename__ = "users"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     email = Column(String(255), unique=True, nullable=False, index=True)
     password_hash = Column(String(255), nullable=False)
     name = Column(String(100))
@@ -35,8 +38,8 @@ class Monitor(Base):
     """Monitor model - represents a URL/API to monitor"""
     __tablename__ = "monitors"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
+    user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     name = Column(String(255), nullable=False)
     url = Column(String(2048), nullable=False)
     method = Column(String(10), default="GET")  # GET, POST, PUT, DELETE
@@ -62,8 +65,8 @@ class Check(Base):
     """Check model - represents a single health check result"""
     __tablename__ = "checks"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    monitor_id = Column(UUID(as_uuid=True), ForeignKey("monitors.id", ondelete="CASCADE"), nullable=False)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
+    monitor_id = Column(String(36), ForeignKey("monitors.id", ondelete="CASCADE"), nullable=False)
     status = Column(String(20), nullable=False)  # up, down, degraded
     status_code = Column(Integer)
     response_time = Column(Integer)  # milliseconds
@@ -78,8 +81,8 @@ class AlertChannel(Base):
     """Alert Channel model - email, slack, telegram, etc."""
     __tablename__ = "alert_channels"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
+    user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     type = Column(String(20), nullable=False)  # email, slack, telegram, discord, webhook
     config = Column(JSON, nullable=False)  # channel-specific config
     is_active = Column(Boolean, default=True)
@@ -94,16 +97,16 @@ class MonitorAlertChannel(Base):
     """Many-to-Many relationship between Monitors and AlertChannels"""
     __tablename__ = "monitor_alert_channels"
     
-    monitor_id = Column(UUID(as_uuid=True), ForeignKey("monitors.id", ondelete="CASCADE"), primary_key=True)
-    alert_channel_id = Column(UUID(as_uuid=True), ForeignKey("alert_channels.id", ondelete="CASCADE"), primary_key=True)
+    monitor_id = Column(String(36), ForeignKey("monitors.id", ondelete="CASCADE"), primary_key=True)
+    alert_channel_id = Column(String(36), ForeignKey("alert_channels.id", ondelete="CASCADE"), primary_key=True)
 
 
 class Subscription(Base):
     """Subscription model - user's payment subscription"""
     __tablename__ = "subscriptions"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
+    user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True)
     lemonsqueezy_subscription_id = Column(String(100), unique=True)
     plan = Column(String(20), nullable=False)  # free, starter, pro, business
     status = Column(String(20), nullable=False)  # active, canceled, past_due

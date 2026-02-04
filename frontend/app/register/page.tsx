@@ -88,8 +88,9 @@ export default function RegisterPage() {
                 minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                 placeholder="••••••••"
+                autoComplete="new-password"
               />
               <p className="mt-1 text-xs text-gray-500">
                 Must be at least 8 characters

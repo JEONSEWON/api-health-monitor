@@ -96,7 +96,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900 bg-white"
               >
                 <option value="email">Email</option>
                 <option value="slack">Slack</option>
