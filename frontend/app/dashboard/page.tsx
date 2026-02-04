@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store';
 import { authAPI, monitorsAPI, analyticsAPI } from '@/lib/api';
 import DashboardLayout from '@/components/DashboardLayout';
+import CreateMonitorModal from '@/components/CreateMonitorModal';
 import { Activity, AlertCircle, CheckCircle, Clock } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -14,6 +15,7 @@ export default function DashboardPage() {
   const [monitors, setMonitors] = useState<any[]>([]);
   const [overview, setOverview] = useState<any>(null);
   const [loading, setLoadingState] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Check authentication
@@ -110,7 +112,10 @@ export default function DashboardPage() {
             <h2 className="text-lg font-semibold text-gray-900">
               Your Monitors
             </h2>
-            <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition text-sm font-medium">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition text-sm font-medium"
+            >
               + Add Monitor
             </button>
           </div>
@@ -124,7 +129,10 @@ export default function DashboardPage() {
               <p className="text-gray-600 mb-4">
                 Get started by creating your first monitor
               </p>
-              <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
+              >
                 Create Monitor
               </button>
             </div>
@@ -136,6 +144,13 @@ export default function DashboardPage() {
             </div>
           )}
         </div>
+
+        {/* Create Monitor Modal */}
+        <CreateMonitorModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={loadData}
+        />
       </div>
     </DashboardLayout>
   );
