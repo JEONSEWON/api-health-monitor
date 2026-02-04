@@ -176,6 +176,8 @@ function StatCard({ title, value, icon, color }: any) {
 }
 
 function MonitorRow({ monitor }: any) {
+  const router = useRouter();
+  
   const statusColors = {
     up: 'bg-green-100 text-green-800',
     down: 'bg-red-100 text-red-800',
@@ -189,7 +191,10 @@ function MonitorRow({ monitor }: any) {
   };
 
   return (
-    <div className="px-6 py-4 hover:bg-gray-50 transition cursor-pointer">
+    <div 
+      onClick={() => router.push(`/dashboard/monitors/${monitor.id}`)}
+      className="px-6 py-4 hover:bg-gray-50 transition cursor-pointer"
+    >
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <h3 className="text-sm font-medium text-gray-900 mb-1">
