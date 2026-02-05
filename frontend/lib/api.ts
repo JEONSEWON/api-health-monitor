@@ -111,7 +111,7 @@ async function refreshAccessToken(): Promise<boolean> {
 }
 
 // Auth API
-export const auth = {
+export const authAPI = {
   register: (email: string, password: string) =>
     apiRequest('/api/v1/auth/register', {
       method: 'POST',
@@ -128,7 +128,7 @@ export const auth = {
 };
 
 // Monitors API
-export const monitors = {
+export const monitorsAPI = {
   list: () => apiRequest('/api/v1/monitors'),
   
   get: (id: string) => apiRequest(`/api/v1/monitors/${id}`),
@@ -170,7 +170,7 @@ export const monitors = {
 };
 
 // Alert Channels API
-export const alertChannels = {
+export const alertChannelsAPI = {
   list: () => apiRequest('/api/v1/alert-channels'),
   
   create: (data: {
@@ -205,7 +205,7 @@ export const alertChannels = {
 };
 
 // Analytics API
-export const analytics = {
+export const analyticsAPI = {
   overview: () => apiRequest('/api/v1/analytics/overview'),
   
   monitorStats: (monitorId: string, days: number = 7) =>
@@ -213,7 +213,7 @@ export const analytics = {
 };
 
 // Subscription API
-export const subscriptions = {
+export const subscriptionAPI = {
   current: () => apiRequest('/api/v1/subscriptions/current'),
   
   createCheckout: (variantId: string) =>
@@ -239,11 +239,18 @@ export const publicApi = {
     fetch(`${API_URL}/api/v1/public/${username}/status`).then(r => r.json()),
 };
 
+// Legacy aliases for backward compatibility
+export const auth = authAPI;
+export const monitors = monitorsAPI;
+export const alertChannels = alertChannelsAPI;
+export const analytics = analyticsAPI;
+export const subscriptions = subscriptionAPI;
+
 export default {
-  auth,
-  monitors,
-  alertChannels,
-  analytics,
-  subscriptions,
+  authAPI,
+  monitorsAPI,
+  alertChannelsAPI,
+  analyticsAPI,
+  subscriptionAPI,
   publicApi,
 };

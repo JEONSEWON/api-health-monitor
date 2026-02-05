@@ -51,7 +51,7 @@ interface AppState {
   reset: () => void;
 }
 
-export const useStore = create<AppState>((set) => ({
+export const useAuthStore = create<AppState>((set) => ({
   user: null,
   monitors: [],
   alertChannels: [],
@@ -94,3 +94,6 @@ export const useStore = create<AppState>((set) => ({
       alertChannels: [],
     }),
 }));
+
+// Alias for backward compatibility
+export const useStore = useAuthStore;
