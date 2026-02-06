@@ -211,6 +211,9 @@ export const analyticsAPI = {
   monitorStats: (monitorId: string, days: number = 7) =>
     apiRequest(`/api/v1/analytics/monitors/${monitorId}?days=${days}`),
   
+  monitor: (monitorId: string, days: number = 7) =>
+    apiRequest(`/api/v1/analytics/monitors/${monitorId}?days=${days}`),
+  
   incidents: (days: number = 7) =>
     apiRequest(`/api/v1/analytics/incidents?days=${days}`),
 };
