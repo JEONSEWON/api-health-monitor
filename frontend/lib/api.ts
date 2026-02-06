@@ -167,6 +167,14 @@ export const monitorsAPI = {
     apiRequest(`/api/v1/monitors/${id}/check-now`, {
       method: 'POST',
     }),
+
+  checks: (id: string, params?: { page?: number; page_size?: number; hours?: number }) => {
+    const query = new URLSearchParams();
+    if (params?.page) query.set('page', params.page.toString());
+    if (params?.page_size) query.set('page_size', params.page_size.toString());
+    if (params?.hours) query.set('hours', params.hours.toString());
+    return apiRequest(`/api/v1/monitors/${id}/checks?${query.toString()}`);
+  },
 };
 
 // Alert Channels API
