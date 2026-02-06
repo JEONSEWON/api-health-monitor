@@ -175,6 +175,18 @@ export const monitorsAPI = {
     if (params?.hours) query.set('hours', params.hours.toString());
     return apiRequest(`/api/v1/monitors/${id}/checks?${query.toString()}`);
   },
+
+  pause: (id: string) =>
+    apiRequest(`/api/v1/monitors/${id}/toggle`, {
+      method: 'POST',
+      body: JSON.stringify({ enabled: false }),
+    }),
+
+  resume: (id: string) =>
+    apiRequest(`/api/v1/monitors/${id}/toggle`, {
+      method: 'POST',
+      body: JSON.stringify({ enabled: true }),
+    }),
 };
 
 // Alert Channels API
