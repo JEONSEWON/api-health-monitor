@@ -36,10 +36,13 @@ interface AppState {
   user: User | null;
   monitors: Monitor[];
   alertChannels: AlertChannel[];
+  loading: boolean;
+  isAuthenticated: boolean;
   
   setUser: (user: User | null) => void;
   setMonitors: (monitors: Monitor[]) => void;
   setAlertChannels: (channels: AlertChannel[]) => void;
+  setLoading: (loading: boolean) => void;
   
   addMonitor: (monitor: Monitor) => void;
   updateMonitor: (id: string, updates: Partial<Monitor>) => void;
@@ -55,8 +58,12 @@ export const useAuthStore = create<AppState>((set) => ({
   user: null,
   monitors: [],
   alertChannels: [],
+  loading: false,
+  isAuthenticated: false,
 
-  setUser: (user) => set({ user }),
+  setUser: (user) => set({ user, isAuthenticated: !!user }),
+  
+  setLoading: (loading) => set({ loading }),
   
   setMonitors: (monitors) => set({ monitors }),
   
@@ -92,6 +99,8 @@ export const useAuthStore = create<AppState>((set) => ({
       user: null,
       monitors: [],
       alertChannels: [],
+      loading: false,
+      isAuthenticated: false,
     }),
 }));
 
