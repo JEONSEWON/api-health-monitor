@@ -242,6 +242,8 @@ export const analyticsAPI = {
 export const subscriptionAPI = {
   current: () => apiRequest('/api/v1/subscriptions/current'),
   
+  get: () => apiRequest('/api/v1/subscriptions/current'),
+  
   createCheckout: (variantId: string) =>
     apiRequest('/api/v1/subscriptions/checkout', {
       method: 'POST',
