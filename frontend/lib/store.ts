@@ -44,6 +44,7 @@ interface AppState {
   setMonitors: (monitors: Monitor[]) => void;
   setAlertChannels: (channels: AlertChannel[]) => void;
   setLoading: (loading: boolean) => void;
+  logout: () => void;
   
   addMonitor: (monitor: Monitor) => void;
   updateMonitor: (id: string, updates: Partial<Monitor>) => void;
@@ -65,6 +66,14 @@ export const useAuthStore = create<AppState>((set) => ({
   setUser: (user) => set({ user, isAuthenticated: !!user }),
   
   setLoading: (loading) => set({ loading }),
+  
+  logout: () => {
+    set({ user: null, isAuthenticated: false, monitors: [], alertChannels: [] });
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+    }
+  },
   
   setMonitors: (monitors) => set({ monitors }),
   
