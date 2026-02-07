@@ -112,10 +112,10 @@ async function refreshAccessToken(): Promise<boolean> {
 
 // Auth API
 export const authAPI = {
-  register: (email: string, password: string) =>
+  register: (email: string, password: string, name?: string) =>
     apiRequest('/api/v1/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, name }),
     }),
 
   login: (email: string, password: string) =>
@@ -248,6 +248,12 @@ export const subscriptionAPI = {
     apiRequest('/api/v1/subscriptions/checkout', {
       method: 'POST',
       body: JSON.stringify({ variant_id: variantId }),
+    }),
+  
+  checkout: (plan: string) =>
+    apiRequest('/api/v1/subscriptions/checkout', {
+      method: 'POST',
+      body: JSON.stringify({ variant_id: plan }),
     }),
 
   cancel: () =>
