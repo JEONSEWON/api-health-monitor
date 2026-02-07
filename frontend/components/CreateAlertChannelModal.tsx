@@ -13,6 +13,7 @@ interface CreateAlertChannelModalProps {
 
 export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: CreateAlertChannelModalProps) {
   const [type, setType] = useState('email');
+  const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   // Email
@@ -52,7 +53,7 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
         config = { url: webhookUrl };
       }
 
-      await alertChannelsAPI.create({ type, config });
+      await alertChannelsAPI.create({ name: name || `${type} Channel`, type, config });
       toast.success('Alert channel created!');
       onSuccess();
       handleClose();
