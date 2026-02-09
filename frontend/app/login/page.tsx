@@ -21,7 +21,7 @@ export default function LoginPage() {
 
     try {
       const response = await authAPI.login(email, password);
-      const { access_token, refresh_token } = response.data;
+      const { access_token, refresh_token } = response;
 
       // Save tokens
       localStorage.setItem('access_token', access_token);
@@ -29,7 +29,7 @@ export default function LoginPage() {
 
       // Get user info
       const userResponse = await authAPI.me();
-      setUser(userResponse.data);
+      setUser(userResponse);
 
       toast.success('Welcome back!');
       router.push('/dashboard');
