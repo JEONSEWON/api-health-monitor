@@ -19,7 +19,7 @@ export default function SettingsPage() {
   const loadSubscription = async () => {
     try {
       const response = await subscriptionAPI.get();
-      setSubscription(response.data);
+      setSubscription(response);
     } catch (error) {
       // No subscription yet
     } finally {
@@ -30,7 +30,7 @@ export default function SettingsPage() {
   const handleUpgrade = async (plan: string) => {
     try {
       const response = await subscriptionAPI.checkout(plan);
-      window.location.href = response.data.checkout_url;
+      window.location.href = response.checkout_url;
     } catch (error: any) {
       toast.error(error.response?.data?.detail || 'Failed to create checkout');
     }

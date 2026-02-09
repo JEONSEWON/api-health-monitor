@@ -19,7 +19,7 @@ export default function AlertChannelsPage() {
   const loadChannels = async () => {
     try {
       const response = await alertChannelsAPI.list();
-      setChannels(response.data);
+      setChannels(response);
     } catch (error) {
       toast.error('Failed to load alert channels');
     } finally {
