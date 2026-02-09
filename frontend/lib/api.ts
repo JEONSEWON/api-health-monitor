@@ -1,6 +1,6 @@
 // API Client for API Health Monitor
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api-health-monitor-production.up.railway.app';
 
 // Token management
 let accessToken: string | null = null;
