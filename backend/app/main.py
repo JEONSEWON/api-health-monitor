@@ -18,7 +18,8 @@ app = FastAPI(
     title=settings.APP_NAME,
     version=settings.VERSION,
     description="API Health Monitoring SaaS - Monitor your APIs and get instant alerts",
-    debug=settings.DEBUG
+    debug=settings.DEBUG,
+    redirect_slashes=False
 )
 
 # CORS middleware
