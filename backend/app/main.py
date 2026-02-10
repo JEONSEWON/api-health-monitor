@@ -14,12 +14,21 @@ from app.schemas import HealthResponse
 settings = get_settings()
 
 # Create FastAPI app
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.VERSION,
     description="API Health Monitoring SaaS - Monitor your APIs and get instant alerts",
     debug=settings.DEBUG,
-    redirect_slashes=False
+    root_path="/",
+    swagger_ui_parameters={"url": "/openapi.json"}
+)
+
+# Trust proxy headers (for Railway HTTPS)
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=["*"]
 )
 
 # CORS middleware
