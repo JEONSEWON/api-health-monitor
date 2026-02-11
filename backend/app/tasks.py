@@ -8,8 +8,11 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
 
 from app.celery_app import celery_app
-from app.database import SessionLocal
+from app.database import SessionLocal, init_db
 from app.models import Monitor, Check
+
+# Initialize database tables on worker startup
+init_db()
 
 
 def get_db():
