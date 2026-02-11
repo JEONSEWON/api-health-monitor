@@ -78,7 +78,7 @@ def get_overview(
 
 @router.get("/monitors/{monitor_id}")
 def get_monitor_analytics(
-    monitor_id: UUID,
+    monitor_id: str,
     days: int = Query(30, ge=1, le=90),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)

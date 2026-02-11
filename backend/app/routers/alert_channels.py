@@ -123,7 +123,7 @@ def create_alert_channel(
 
 @router.get("/{channel_id}", response_model=AlertChannelResponse)
 def get_alert_channel(
-    channel_id: UUID,
+    channel_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -146,7 +146,7 @@ def get_alert_channel(
 
 @router.put("/{channel_id}", response_model=AlertChannelResponse)
 def update_alert_channel(
-    channel_id: UUID,
+    channel_id: str,
     channel_data: AlertChannelUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -183,7 +183,7 @@ def update_alert_channel(
 
 @router.delete("/{channel_id}", response_model=MessageResponse)
 def delete_alert_channel(
-    channel_id: UUID,
+    channel_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -209,8 +209,8 @@ def delete_alert_channel(
 
 @router.post("/{channel_id}/attach/{monitor_id}", response_model=MessageResponse)
 def attach_channel_to_monitor(
-    channel_id: UUID,
-    monitor_id: UUID,
+    channel_id: str,
+    monitor_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -250,8 +250,8 @@ def attach_channel_to_monitor(
 
 @router.post("/{channel_id}/detach/{monitor_id}", response_model=MessageResponse)
 def detach_channel_from_monitor(
-    channel_id: UUID,
-    monitor_id: UUID,
+    channel_id: str,
+    monitor_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
