@@ -117,7 +117,7 @@ def create_monitor(
 
 @router.get("/{monitor_id}", response_model=MonitorResponse)
 def get_monitor(
-    monitor_id: UUID,
+    monitor_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -140,7 +140,7 @@ def get_monitor(
 
 @router.put("/{monitor_id}", response_model=MonitorResponse)
 def update_monitor(
-    monitor_id: UUID,
+    monitor_id: str,
     monitor_data: MonitorUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -183,7 +183,7 @@ def update_monitor(
 
 @router.delete("/{monitor_id}", response_model=MessageResponse)
 def delete_monitor(
-    monitor_id: UUID,
+    monitor_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -209,7 +209,7 @@ def delete_monitor(
 
 @router.get("/{monitor_id}/checks", response_model=CheckListResponse)
 def get_monitor_checks(
-    monitor_id: UUID,
+    monitor_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     page: int = Query(1, ge=1),
@@ -263,7 +263,7 @@ def get_monitor_checks(
 
 @router.post("/{monitor_id}/pause", response_model=MessageResponse)
 def pause_monitor(
-    monitor_id: UUID,
+    monitor_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -291,7 +291,7 @@ def pause_monitor(
 
 @router.post("/{monitor_id}/resume", response_model=MessageResponse)
 def resume_monitor(
-    monitor_id: UUID,
+    monitor_id: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
