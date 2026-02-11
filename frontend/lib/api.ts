@@ -191,14 +191,14 @@ export const monitorsAPI = {
 
 // Alert Channels API
 export const alertChannelsAPI = {
-  list: () => apiRequest('/api/v1/alert-channels'),
+  list: () => apiRequest('/api/v1/alert-channels/'),
   
   create: (data: {
     name: string;
     type: string;
     config: Record<string, any>;
   }) =>
-    apiRequest('/api/v1/alert-channels', {
+    apiRequest('/api/v1/alert-channels/', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
