@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
 import { monitorsAPI, analyticsAPI } from '@/lib/api';
-import { 
-  ArrowLeft, 
-  CheckCircle, 
-  AlertCircle, 
+import {
+  ArrowLeft,
+  CheckCircle,
+  AlertCircle,
   Clock,
   Activity,
   Trash2,
@@ -36,19 +36,19 @@ export default function MonitorDetailPage() {
     try {
       // Get monitor details
       const monitorResponse = await monitorsAPI.get(monitorId);
-      setMonitor(monitorResponse.data);
+      setMonitor(monitorResponse);
 
       // Get analytics
       const analyticsResponse = await analyticsAPI.monitor(monitorId, 7);
-      setAnalytics(analyticsResponse.data);
+      setAnalytics(analyticsResponse);
 
       // Get recent checks
-      const checksResponse = await monitorsAPI.checks(monitorId, { 
-        page: 1, 
+      const checksResponse = await monitorsAPI.checks(monitorId, {
+        page: 1,
         page_size: 20,
-        hours: 24 
+        hours: 24
       });
-      setChecks(checksResponse.data.checks);
+      setChecks(checksResponse.checks);
     } catch (error) {
       toast.error('Failed to load monitor');
       router.push('/dashboard');

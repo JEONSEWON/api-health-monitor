@@ -34,16 +34,16 @@ export default function DashboardPage() {
       // Get user info if not loaded
       if (!user) {
         const userResponse = await authAPI.me();
-        setUser(userResponse.data);
+        setUser(userResponse);
       }
 
       // Get monitors
       const monitorsResponse = await monitorsAPI.list();
-      setMonitors(monitorsResponse.data);
+      setMonitors(monitorsResponse);
 
       // Get analytics overview
       const overviewResponse = await analyticsAPI.overview();
-      setOverview(overviewResponse.data);
+      setOverview(overviewResponse);
     } catch (error) {
       toast.error('Failed to load dashboard');
       router.push('/login');

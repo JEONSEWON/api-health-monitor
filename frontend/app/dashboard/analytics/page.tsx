@@ -21,8 +21,8 @@ export default function AnalyticsPage() {
         analyticsAPI.overview(),
         analyticsAPI.incidents(7),
       ]);
-      setOverview(overviewRes.data);
-      setIncidents(incidentsRes.data.incidents || []);
+      setOverview(overviewRes);
+      setIncidents(incidentsRes.incidents || []);
     } catch (error) {
       toast.error('Failed to load analytics');
     } finally {
