@@ -141,7 +141,7 @@ export const monitorsAPI = {
     timeout?: number;
     expected_status?: number;
   }) =>
-    apiRequest('/api/v1/monitors', {
+    apiRequest('/api/v1/monitors/', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
