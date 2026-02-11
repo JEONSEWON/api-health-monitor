@@ -131,7 +131,7 @@ export const authAPI = {
 export const monitorsAPI = {
   list: () => apiRequest('/api/v1/monitors/'),
   
-  get: (id: string) => apiRequest(`/api/v1/monitors/${id}/`),
+  get: (id: string) => apiRequest(`/api/v1/monitors/${id}`),
   
   create: (data: {
     name: string;
@@ -147,13 +147,13 @@ export const monitorsAPI = {
     }),
 
   update: (id: string, data: any) =>
-    apiRequest(`/api/v1/monitors/${id}/`, {
+    apiRequest(`/api/v1/monitors/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
 
   delete: (id: string) =>
-    apiRequest(`/api/v1/monitors/${id}/`, {
+    apiRequest(`/api/v1/monitors/${id}`, {
       method: 'DELETE',
     }),
 
