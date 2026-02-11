@@ -129,7 +129,7 @@ export const authAPI = {
 
 // Monitors API
 export const monitorsAPI = {
-  list: () => apiRequest('/api/v1/monitors'),
+  list: () => apiRequest('/api/v1/monitors/'),
   
   get: (id: string) => apiRequest(`/api/v1/monitors/${id}`),
   
