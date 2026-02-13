@@ -83,7 +83,7 @@ export default function HomePage() {
                   <div key={i} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="h-5 w-5 text-green-600" />
-                      <span className="font-medium">{name}</span>
+                      <span className="font-medium text-gray-900">{name}</span>
                     </div>
                     <span className="text-sm text-gray-500">99.8% uptime</span>
                   </div>
