@@ -192,6 +192,9 @@ async def lemonsqueezy_webhook(request: Request, db: Session = Depends(get_db)):
     custom_data = attributes.get("custom_data", {})
     
     print(f"📥 Webhook received: {event_name}")
+    print(f"   Full data keys: {list(data.keys())}")
+    print(f"   Attributes keys: {list(attributes.keys())}")
+    print(f"   Custom data: {custom_data}")
     
     # Extract data
     user_id = custom_data.get("user_id")
