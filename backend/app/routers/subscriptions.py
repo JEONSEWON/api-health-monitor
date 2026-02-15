@@ -198,19 +198,31 @@ async def lemonsqueezy_webhook(request: Request, db: Session = Depends(get_db)):
     
     # Extract data
     user_id = custom_data.get("user_id")
-    plan = custom_data.get("plan", "starter")
+    plan = custom_data.get("plan")
     lemonsqueezy_subscription_id = subscription_data.get("id")
     status_ls = attributes.get("status")
     ends_at = attributes.get("ends_at")
+    user_email = attributes.get("user_email")
+    variant_id = str(attributes.get("variant_id", ""))
     
-    if not user_id:
-        print("⚠️  No user_id in webhook")
-        return {"message": "No user_id"}
+    # Infer plan from variant_id if not in custom_data
+    if not plan:
+        from app.lemonsqueezy import PLAN_VARIANTS
+        variant_to_plan = {v: k for k, v in PLAN_VARIANTS.items()}
+        plan = variant_to_plan.get(variant_id, "starter")
+        print(f"🔍 Inferred plan from variant {variant_id}: {plan}")
     
-    # Get user
-    user = db.query(User).filter(User.id == user_id).first()
+    # Try to find user by ID first, then by email
+    user = None
+    if user_id:
+        user = db.query(User).filter(User.id == user_id).first()
+    
+    if not user and user_email:
+        user = db.query(User).filter(User.email == user_email).first()
+        print(f"🔍 Found user by email: {user_email}")
+    
     if not user:
-        print(f"⚠️  User {user_id} not found")
+        print(f"⚠️  User not found (id: {user_id}, email: {user_email})")
         return {"message": "User not found"}
     
     # Handle different events
