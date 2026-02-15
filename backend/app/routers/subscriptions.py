@@ -230,21 +230,34 @@ async def lemonsqueezy_webhook(request: Request, db: Session = Depends(get_db)):
     
     # Handle different events
     if event_name == "subscription_created":
-        # Create subscription record
-        subscription = Subscription(
-            user_id=user.id,
-            lemonsqueezy_subscription_id=lemonsqueezy_subscription_id,
-            plan=plan,
-            status="active",
-            current_period_end=datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
-        )
-        db.add(subscription)
+        # Check if subscription already exists (webhook may be resent)
+        existing_sub = db.query(Subscription).filter(
+            Subscription.user_id == user.id
+        ).first()
+        
+        if existing_sub:
+            # Update existing subscription
+            existing_sub.lemonsqueezy_subscription_id = lemonsqueezy_subscription_id
+            existing_sub.plan = plan
+            existing_sub.status = "active"
+            existing_sub.current_period_end = datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
+            print(f"🔄 Updated existing subscription for user {user.email}: {plan}")
+        else:
+            # Create new subscription
+            subscription = Subscription(
+                user_id=user.id,
+                lemonsqueezy_subscription_id=lemonsqueezy_subscription_id,
+                plan=plan,
+                status="active",
+                current_period_end=datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
+            )
+            db.add(subscription)
+            print(f"✅ Subscription created for user {user.email}: {plan}")
         
         # Update user plan
         user.plan = plan
         
         db.commit()
-        print(f"✅ Subscription created for user {user.email}: {plan}")
     
     elif event_name == "subscription_updated":
         # Update subscription
