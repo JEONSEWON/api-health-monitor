@@ -162,29 +162,32 @@ async def lemonsqueezy_webhook(request: Request, db: Session = Depends(get_db)):
     - subscription_paused
     - subscription_unpaused
     """
-    # TODO: Fix signature verification
-    # Temporarily disabled for testing
-    # signature = request.headers.get("X-Signature")
-    # if not signature:
-    #     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    # Verify webhook signature
+    signature = request.headers.get("X-Signature")
+    if not signature:
+        print("⚠️ No signature in webhook")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="No signature")
     
-    # body = await request.body()
+    # Read body (must read before JSON parsing)
+    body = await request.body()
     
-    # # Verify signature
-    # expected_signature = hmac.new(
-    #     settings.LEMONSQUEEZY_WEBHOOK_SECRET.encode(),
-    #     body,
-    #     hashlib.sha256
-    # ).hexdigest()
+    # Verify signature
+    expected_signature = hmac.new(
+        settings.LEMONSQUEEZY_WEBHOOK_SECRET.encode(),
+        body,
+        hashlib.sha256
+    ).hexdigest()
     
-    # if not hmac.compare_digest(signature, expected_signature):
-    #     raise HTTPException(
-    #         status_code=status.HTTP_401_UNAUTHORIZED,
-    #         detail="Invalid webhook signature"
-    #     )
+    if not hmac.compare_digest(signature, expected_signature):
+        print(f"⚠️ Invalid signature: expected {expected_signature}, got {signature}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid webhook signature"
+        )
     
-    # Parse webhook data
-    data = await request.json()
+    # Parse webhook data from body
+    import json
+    data = json.loads(body.decode('utf-8'))
     
     event_name = data.get("meta", {}).get("event_name")
     subscription_data = data.get("data", {})
