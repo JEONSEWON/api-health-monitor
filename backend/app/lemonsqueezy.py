@@ -130,11 +130,11 @@ class LemonSqueezyAPI:
         return self._request("GET", f"customers/{customer_id}")
 
 
-# Plan to Variant ID mapping (configure these after creating products in LemonSqueezy)
+# Plan to Variant ID mapping (configured from LemonSqueezy)
 PLAN_VARIANTS = {
-    "starter": "123456",  # Replace with actual LemonSqueezy variant IDs
-    "pro": "123457",
-    "business": "123458"
+    "starter": "1309924",  # API Health Monitor - Starter ($5/month)
+    "pro": "1309944",      # API Health Monitor - Pro ($15/month)
+    "business": "1309949"  # API Health Monitor - Business ($49/month)
 }
 
 
