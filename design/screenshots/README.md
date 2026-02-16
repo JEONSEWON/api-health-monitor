@@ -45,6 +45,20 @@ Product screenshots for marketing, Product Hunt, and documentation.
   - Time period: Last 24 hours
 - **Use for**: Analytics feature showcase, Performance visualization
 
+### 05-alert-channels.png
+- **Page**: Alert Channels (with Add Channel Modal)
+- **Features shown**:
+  - Alert channel list (Email: a2jeon123@naver.com - Active)
+  - "How to use alert channels" guide box with 4 steps
+  - Add Channel modal with 5 notification options:
+    - Email (highlighted)
+    - Slack
+    - Telegram
+    - Discord
+    - Custom Webhook
+  - Clean modal UI with dropdown selector
+- **Use for**: Multi-channel alerting feature, Integration showcase
+
 ## Image Specifications
 
 - **Format**: PNG
@@ -57,7 +71,7 @@ Product screenshots for marketing, Product Hunt, and documentation.
 
 ### Product Hunt
 - **Main Image**: 02-landing-page.png
-- **Gallery Images**: 01-dashboard-empty.png, 03-monitor-detail.png, 04-analytics.png
+- **Gallery Images**: 01-dashboard-empty.png, 03-monitor-detail.png, 05-alert-channels.png, 04-analytics.png
 - **Thumbnail**: Crop from 02-landing-page.png (1:1 ratio)
 
 ### README.md
@@ -67,12 +81,14 @@ Product screenshots for marketing, Product Hunt, and documentation.
 ![Landing Page](design/screenshots/02-landing-page.png)
 ![Dashboard](design/screenshots/01-dashboard-empty.png)
 ![Monitor Detail](design/screenshots/03-monitor-detail.png)
+![Alert Channels](design/screenshots/05-alert-channels.png)
 ![Analytics](design/screenshots/04-analytics.png)
 ```
 
 ### Twitter Thread
 - Use 02-landing-page.png for main tweet
-- Use 03-monitor-detail.png for feature highlight
+- Use 03-monitor-detail.png for monitoring feature
+- Use 05-alert-channels.png for multi-channel alerts feature
 - Use 04-analytics.png for metrics/analytics
 
 ### Documentation
