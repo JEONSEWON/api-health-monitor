@@ -1,299 +1,225 @@
-# 🚀 API Health Monitor
+# CheckAPI - API Health Monitor
 
-> **Monitor your APIs 24/7 with instant alerts**  
-> Simple, powerful, and affordable API monitoring for developers and teams.
+<div align="center">
+  
+![CheckAPI Logo](design/logos/checkapi-logo.jpg)
 
-[![Website](https://img.shields.io/badge/Website-checkapi.io-green)](https://checkapi.io)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Built with FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688.svg)](https://fastapi.tiangolo.com)
-[![Built with Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org)
+**Monitor Your APIs 24/7 with Instant Alerts**
 
----
+[![Live Demo](https://img.shields.io/badge/demo-checkapi.io-green)](https://checkapi.io)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Built with FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Built with Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
 
-## 📖 Overview
+[Live Demo](https://checkapi.io) · [Report Bug](https://github.com/JEONSEWON/api-health-monitor/issues) · [Request Feature](https://github.com/JEONSEWON/api-health-monitor/issues)
 
-API Health Monitor is a full-stack SaaS application that monitors your APIs and websites 24/7, sending instant alerts when something goes wrong.
-
-**🌐 Live Demo:** [https://checkapi.io](https://checkapi.io)
-
-**🤖 Built with AI:** This entire project was built in 6 weeks using [OpenClaw](https://openclaw.com) - an AI coding assistant that actually executes code, deploys to production, and manages the entire development workflow. What would normally take 3-4 months was completed in 6 weeks thanks to AI-assisted development.
-
-### ✨ Key Features
-
-- 🔄 **Automatic Health Checks** - Monitor APIs every 1-5 minutes
-- 📬 **Multi-Channel Alerts** - Email, Slack, Telegram, Discord, Webhook
-- 📊 **Real-Time Analytics** - Uptime tracking, response times, incident logs
-- 🌍 **Public Status Pages** - Share your API status with customers
-- 💳 **Built-in Payments** - LemonSqueezy subscription management
-- 🎨 **Modern UI** - Clean dashboard built with Next.js 14 & Tailwind CSS
+</div>
 
 ---
 
-## 🎯 Why API Health Monitor?
+## 🚀 About CheckAPI
 
-| Feature | API Health Monitor | Pingdom | UptimeRobot |
-|---------|-------------------|---------|-------------|
-| **Price** | $5-15/month | $15-75/month | $8-60/month |
-| **Setup Time** | < 60 seconds | 5+ minutes | 3+ minutes |
-| **UI/UX** | Modern (2024) | Outdated | Basic |
-| **Open Source** | ✅ Yes | ❌ No | ❌ No |
-| **Alert Channels** | 5 | 3 | 4 |
+CheckAPI is a powerful yet simple **API health monitoring service** that tracks your APIs and websites 24/7. Get **instant alerts** via multiple channels when your services go down. Perfect for developers, startups, and teams who need reliable uptime monitoring without the complexity.
 
-**🎯 50% cheaper. 10x faster setup. Modern design.**
+### Why CheckAPI?
 
----
-
-## 🚀 Tech Stack
-
-### Backend
-- **Framework:** FastAPI (Python 3.12)
-- **Database:** SQLite (Production: Railway Volume)
-- **Cache & Queue:** Redis
-- **Task Queue:** Celery + Beat
-- **ORM:** SQLAlchemy
-- **Auth:** JWT (RS256)
-- **Payment:** LemonSqueezy
-
-### Frontend
-- **Framework:** Next.js 14 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **State Management:** Zustand
-- **HTTP Client:** Axios with auto token refresh
-- **UI Components:** Custom components
-
-### Infrastructure
-- **Frontend:** Vercel (Edge Network)
-- **Backend:** Railway (API + Worker)
-- **Database:** Railway SQLite Volume
-- **Redis:** Railway Redis
-- **Domain:** checkapi.io
-- **Monitoring:** Self-hosted (dogfooding!)
+- ⚡ **Simple Setup** - Add your first monitor in 60 seconds
+- 🔔 **Multi-Channel Alerts** - Email, Slack, Telegram, Discord, or Custom Webhooks
+- 📊 **Real-Time Analytics** - Response time, uptime %, incident tracking
+- 💰 **Affordable Pricing** - Free tier available, paid plans from $5/month
+- 🌐 **Public Status Pages** - Share uptime with your users
+- 🔒 **Secure & Reliable** - Built with industry-standard security
 
 ---
 
-## 📦 Project Structure
-
-```
-api-health-monitor/
-├── backend/               # FastAPI backend
-│   ├── app/
-│   │   ├── routers/      # API routes
-│   │   ├── models.py     # SQLAlchemy models
-│   │   ├── schemas.py    # Pydantic schemas
-│   │   ├── auth.py       # JWT authentication
-│   │   ├── tasks.py      # Celery tasks
-│   │   ├── alerts.py     # Alert integrations
-│   │   └── lemonsqueezy.py # Payment integration
-│   └── requirements.txt
-├── frontend/             # Next.js frontend
-│   ├── app/             # App Router pages
-│   ├── components/      # React components
-│   ├── lib/            # Utilities & API client
-│   └── package.json
-└── docs/               # Documentation
-```
-
----
-
-## 🎨 Screenshots
-
-> *Screenshots will be added here*
+## 📸 Screenshots
 
 ### Landing Page
-![Landing](./screenshots/landing.png)
+![Landing Page](design/screenshots/02-landing-page.png)
 
 ### Dashboard
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](design/screenshots/01-dashboard-empty.png)
 
 ### Monitor Details
-![Monitor](./screenshots/monitor-detail.png)
+![Monitor Detail](design/screenshots/03-monitor-detail.png)
 
 ### Alert Channels
-![Alerts](./screenshots/alerts.png)
+![Alert Channels](design/screenshots/05-alert-channels.png)
+
+### Analytics
+![Analytics](design/screenshots/04-analytics.png)
 
 ---
 
-## 💰 Pricing
+## ✨ Features
 
-| Plan | Price | Monitors | Check Interval | Features |
-|------|-------|----------|----------------|----------|
-| **Free** | $0 | 3 | 5 minutes | Email alerts, Public status page |
+### Core Monitoring
+- 🔍 **HTTP/HTTPS Monitoring** - Support for all HTTP methods (GET, POST, PUT, DELETE, HEAD)
+- ⏰ **Customizable Intervals** - From 30 seconds to 1 hour check intervals
+- 📈 **Response Time Tracking** - Monitor API performance over time
+- 📊 **Uptime Percentage** - Real-time uptime calculations
+- 🔴 **Incident Detection** - Automatic down/up state detection
+- ✅ **Status Code Validation** - Expected status code checking
+- ⏱️ **Timeout Configuration** - Customizable request timeouts
+
+### Alert Channels (5 Options)
+- 📧 **Email** - Send alerts to any email address
+- 💬 **Slack** - Integrate with your team's Slack workspace
+- 📱 **Telegram** - Get instant mobile notifications via Telegram bot
+- 🎮 **Discord** - Notify your Discord server channels
+- 🔗 **Custom Webhooks** - POST to any webhook endpoint
+
+### Analytics & Reporting
+- 📊 **Overview Dashboard** - Total monitors, online/offline status, overall uptime
+- 📈 **Response Time Charts** - Visualize API performance trends
+- 🔍 **Recent Checks History** - Detailed log of all health checks
+- 🚨 **Incident Timeline** - Track all down/up events (7-day history)
+- 📉 **Monitor Status Distribution** - At-a-glance system health
+
+### Subscription Plans
+- 💳 **LemonSqueezy Integration** - Secure payment processing
+- 🎁 **Free Tier** - 3 monitors with 5-minute intervals
+- 🚀 **Paid Plans** - Scale up to 100+ monitors with 30-second checks
+- 🔄 **Easy Upgrades** - Seamless plan upgrades and downgrades
+- 💰 **Flexible Billing** - Monthly subscriptions, cancel anytime
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Framework:** [FastAPI](https://fastapi.tiangolo.com/) - High-performance Python web framework
+- **Task Queue:** [Celery](https://docs.celeryq.dev/) - Distributed task queue for health checks
+- **Scheduler:** Celery Beat - Periodic task scheduler
+- **Database:** SQLite (with PostgreSQL support)
+- **Cache/Broker:** [Redis](https://redis.io/) - Message broker and caching
+- **ORM:** SQLAlchemy - Database toolkit and ORM
+- **Auth:** JWT (JSON Web Tokens) - Secure authentication
+- **Payment:** [LemonSqueezy](https://lemonsqueezy.com/) - Subscription management
+
+### Frontend
+- **Framework:** [Next.js 14](https://nextjs.org/) - React framework with App Router
+- **Language:** TypeScript - Type-safe JavaScript
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- **State Management:** Zustand - Lightweight state management
+- **HTTP Client:** Axios - Promise-based HTTP client
+- **Icons:** Lucide React - Beautiful icon library
+- **Notifications:** React Hot Toast - Toast notifications
+
+### Deployment & DevOps
+- **Backend Hosting:** [Railway](https://railway.app/) - Backend API + Celery Worker + Redis
+- **Frontend Hosting:** [Vercel](https://vercel.com/) - Next.js deployment
+- **Domain:** [Namecheap](https://www.namecheap.com/) - Custom domain (checkapi.io)
+- **Version Control:** Git + GitHub
+- **CI/CD:** Automatic deployment via Railway and Vercel
+
+---
+
+## 🎯 Pricing
+
+| Plan | Price | Monitors | Interval | Features |
+|------|-------|----------|----------|----------|
+| **Free** | $0/month | 3 | 5 minutes | Email alerts, Public status page |
 | **Starter** | $5/month | 20 | 1 minute | All alert channels, Analytics |
 | **Pro** | $15/month | 100 | 30 seconds | Team sharing, Priority support |
-| **Business** | $49/month | Unlimited | 10 seconds | Custom features, SLA |
+| **Business** | $49/month | Unlimited | 30 seconds | White-label, Advanced analytics |
 
-**🎁 Free plan available. No credit card required.**
+✅ All plans include unlimited team members  
+✅ No credit card required for free tier  
+✅ Cancel anytime, no questions asked
 
----
-
-## 🔧 Features in Detail
-
-### 1. Monitoring
-- ✅ HTTP/HTTPS endpoints
-- ✅ GET, POST, PUT, DELETE methods
-- ✅ Custom headers & body
-- ✅ Response time tracking
-- ✅ Status code validation
-- ✅ Automatic retries
-
-### 2. Alerts
-- ✅ **Email** - via SendGrid
-- ✅ **Slack** - Webhook integration
-- ✅ **Telegram** - Bot alerts
-- ✅ **Discord** - Webhook alerts
-- ✅ **Custom Webhook** - POST JSON
-
-### 3. Analytics
-- ✅ Uptime percentage (24h, 7d, 30d, 90d)
-- ✅ Average response time
-- ✅ Total checks & incidents
-- ✅ Daily uptime history (90 days)
-- ✅ Response time trends
-
-### 4. Public Status Page
-- ✅ Real-time status display
-- ✅ Uptime history
-- ✅ Incident timeline
-- ✅ Custom domain support (coming soon)
-- ✅ No authentication required
-
-### 5. Subscription Management
-- ✅ LemonSqueezy checkout
-- ✅ Automatic plan upgrades
-- ✅ Webhook processing
-- ✅ Plan limits enforcement
-- ✅ Subscription cancellation
+[View Pricing →](https://checkapi.io)
 
 ---
 
-## 🛠️ Development
+## 🚦 Quick Start
 
-### Prerequisites
-- Python 3.12+
-- Node.js 18+
-- Redis
-- Git
+### For Users
 
-### Backend Setup
+1. **Sign Up** at [checkapi.io](https://checkapi.io)
+2. **Create a Monitor**
+   - Enter your API URL
+   - Set check interval (5 minutes minimum for free)
+   - Choose expected status code (default: 200)
+3. **Add Alert Channel**
+   - Email, Slack, Telegram, Discord, or Webhook
+   - Configure credentials/URLs
+4. **Monitor Your API**
+   - Receive alerts when your API goes down
+   - Track uptime and response times
 
+### For Developers
+
+See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for system design details.
+
+#### Backend Setup
 ```bash
-cd backend
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+# Clone repository
+git clone https://github.com/JEONSEWON/api-health-monitor.git
+cd api-health-monitor/backend
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Setup environment variables
+# Set up environment variables
 cp .env.example .env
 # Edit .env with your configuration
 
-# Initialize database
-python -m app.database
+# Run database migrations
+# (SQLite auto-creates on first run)
 
-# Run backend
+# Start API server
 uvicorn app.main:app --reload
 
-# Run Celery worker (separate terminal)
-celery -A app.celery_app worker --loglevel=info
-
-# Run Celery beat (separate terminal)
-celery -A app.celery_app beat --loglevel=info
+# Start Celery worker (in separate terminal)
+celery -A app.celery_app worker --beat --loglevel=info
 ```
 
-### Frontend Setup
-
+#### Frontend Setup
 ```bash
 cd frontend
 
 # Install dependencies
 npm install
 
-# Setup environment variables
+# Set up environment variables
 cp .env.local.example .env.local
-# Edit .env.local with your API URL
+# Edit .env.local with API URL
 
-# Run development server
+# Start development server
 npm run dev
 ```
 
-Visit:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- API Docs: http://localhost:8000/docs
+Visit `http://localhost:3000`
 
 ---
 
-## 🚢 Deployment
+## 📚 Documentation
 
-### Backend (Railway)
-
-1. Create new project on [Railway](https://railway.app)
-2. Add PostgreSQL plugin (or use SQLite)
-3. Add Redis plugin
-4. Connect GitHub repo
-5. Add environment variables
-6. Create Worker service (same repo, different start command)
-7. Deploy!
-
-**Backend Start Command:**
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
-```
-
-**Worker Start Command:**
-```bash
-celery -A app.celery_app worker --beat --loglevel=info --concurrency=2
-```
-
-### Frontend (Vercel)
-
-1. Import project on [Vercel](https://vercel.com)
-2. Select `frontend` as root directory
-3. Add environment variables
-4. Deploy!
+- [Architecture Overview](docs/ARCHITECTURE.md) - System design and components
+- [Tech Stack Details](docs/TECH_STACK.md) - Technologies and libraries used
+- [Alert Setup Guide](backend/ALERT_SETUP.md) - Configure alert channels
+- [LemonSqueezy Integration](backend/LEMONSQUEEZY_SETUP.md) - Payment setup
+- [Development Progress](PROGRESS.md) - Build log and changelog
+- [Branding Assets](design/BRANDING.md) - Logo and design resources
 
 ---
 
-## 📚 API Documentation
+## 🎨 Branding
 
-Full API documentation is available at `/docs` endpoint (Swagger UI).
+CheckAPI uses a modern, clean design with a focus on reliability and uptime.
 
-### Quick Start
+- **Primary Color:** Green (#10B981) - Represents success and stability
+- **Logo:** Upward trend line in a square frame
+- **Font:** Inter (Google Fonts)
 
-```bash
-# Register
-curl -X POST https://api-health-monitor-production.up.railway.app/api/v1/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password123","name":"John Doe"}'
-
-# Login
-curl -X POST https://api-health-monitor-production.up.railway.app/api/v1/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password123"}'
-
-# Create Monitor
-curl -X POST https://api-health-monitor-production.up.railway.app/api/v1/monitors/ \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "My API",
-    "url": "https://api.example.com/health",
-    "method": "GET",
-    "interval": 300,
-    "timeout": 30,
-    "expected_status": 200
-  }'
-```
+See [design/BRANDING.md](design/BRANDING.md) for full brand guidelines and assets.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit issues and pull requests.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -311,23 +237,29 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- [OpenClaw](https://openclaw.com/) - AI coding assistant that made this project possible in 6 weeks
+Built with:
 - [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
 - [Next.js](https://nextjs.org/) - React framework
+- [Railway](https://railway.app/) - Backend deployment
+- [Vercel](https://vercel.com/) - Frontend deployment
 - [LemonSqueezy](https://lemonsqueezy.com/) - Payment processing
-- [Railway](https://railway.app/) - Backend hosting
-- [Vercel](https://vercel.com/) - Frontend hosting
+
+Special thanks to the open-source community! 💚
 
 ---
 
-## 📧 Contact
+## 📬 Contact
 
-- **Website:** [https://checkapi.io](https://checkapi.io)
-- **Email:** support@checkapi.io
-- **Twitter:** [@checkapi_io](https://twitter.com/checkapi_io)
+- **Website:** [checkapi.io](https://checkapi.io)
+- **GitHub:** [@JEONSEWON](https://github.com/JEONSEWON)
+- **Issues:** [Report a bug](https://github.com/JEONSEWON/api-health-monitor/issues)
 
 ---
 
-**Built with ❤️ by indie hackers, for indie hackers.**
+<div align="center">
 
-**🌟 Star this repo if you find it useful!**
+**Built with ❤️ by developers, for developers**
+
+[Get Started for Free →](https://checkapi.io)
+
+</div>
