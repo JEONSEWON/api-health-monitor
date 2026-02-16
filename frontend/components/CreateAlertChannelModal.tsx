@@ -82,9 +82,9 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
       <div className="flex min-h-full items-center justify-center p-4">
         <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full">
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b">
-            <h2 className="text-xl font-semibold">Add Alert Channel</h2>
-            <button onClick={handleClose} className="p-2 hover:bg-gray-100 rounded-lg">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+            <h2 className="text-xl font-semibold text-gray-900">Add Alert Channel</h2>
+            <button onClick={handleClose} className="p-2 hover:bg-gray-100 rounded-lg text-gray-700">
               <X className="h-5 w-5" />
             </button>
           </div>
@@ -93,11 +93,11 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             {/* Type */}
             <div>
-              <label className="block text-sm font-medium mb-2">Channel Type *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Channel Type *</label>
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900 bg-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900 bg-white"
               >
                 <option value="email">Email</option>
                 <option value="slack">Slack</option>
@@ -110,13 +110,13 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
             {/* Email Fields */}
             {type === 'email' && (
               <div>
-                <label className="block text-sm font-medium mb-2">Email Address *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                   placeholder="you@example.com"
                 />
               </div>
@@ -125,13 +125,13 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
             {/* Slack Fields */}
             {type === 'slack' && (
               <div>
-                <label className="block text-sm font-medium mb-2">Webhook URL *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Webhook URL *</label>
                 <input
                   type="url"
                   required
                   value={slackWebhook}
                   onChange={(e) => setSlackWebhook(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                   placeholder="https://hooks.slack.com/services/..."
                 />
                 <p className="text-xs text-gray-500 mt-1">
@@ -144,24 +144,24 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
             {type === 'telegram' && (
               <>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Bot Token *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Bot Token *</label>
                   <input
                     type="text"
                     required
                     value={telegramBotToken}
                     onChange={(e) => setTelegramBotToken(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                     placeholder="123456:ABC-DEF1234ghIkl..."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Chat ID *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Chat ID *</label>
                   <input
                     type="text"
                     required
                     value={telegramChatId}
                     onChange={(e) => setTelegramChatId(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                     placeholder="-1001234567890"
                   />
                 </div>
@@ -171,13 +171,13 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
             {/* Discord Fields */}
             {type === 'discord' && (
               <div>
-                <label className="block text-sm font-medium mb-2">Webhook URL *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Webhook URL *</label>
                 <input
                   type="url"
                   required
                   value={discordWebhook}
                   onChange={(e) => setDiscordWebhook(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                   placeholder="https://discord.com/api/webhooks/..."
                 />
               </div>
@@ -186,13 +186,13 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
             {/* Webhook Fields */}
             {type === 'webhook' && (
               <div>
-                <label className="block text-sm font-medium mb-2">Webhook URL *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Webhook URL *</label>
                 <input
                   type="url"
                   required
                   value={webhookUrl}
                   onChange={(e) => setWebhookUrl(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-600 text-gray-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
                   placeholder="https://your-server.com/webhook"
                 />
               </div>
@@ -203,14 +203,14 @@ export default function CreateAlertChannelModal({ isOpen, onClose, onSuccess }: 
               <button
                 type="button"
                 onClick={handleClose}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-gray-900"
+                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-gray-900"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 flex items-center"
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
                 {isLoading ? (
                   <>
