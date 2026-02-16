@@ -39,14 +39,16 @@ Core features:
 📈 Uptime analytics
 💳 Built-in payments (LemonSqueezy)
 
-### Tweet 5 (Tech Stack)
+### Tweet 5 (Tech Stack + Secret Weapon)
 Tech stack for the nerds 🤓:
 
 Backend: FastAPI + SQLite + Redis + Celery
 Frontend: Next.js 14 + TypeScript + Tailwind
 Hosting: Railway (backend) + Vercel (frontend)
 
-Full-stack in 6 weeks. Solo dev.
+Secret weapon: Built with @OpenClaw - AI pair programmer that actually codes.
+
+Full-stack in 6 weeks. (Would've taken 3-4 months without AI)
 
 ### Tweet 6 (Screenshot)
 Here's what the dashboard looks like 👇
@@ -277,7 +279,9 @@ What I'd do differently:
 2️⃣ Build landing page first
 3️⃣ Get beta users sooner
 4️⃣ Use more libraries (don't reinvent)
-5️⃣ Sleep more (burnout is real)
+5️⃣ Use @OpenClaw from day 1 (not week 2)
+
+Actually, scratch that. I did use OpenClaw. That's HOW I shipped in 6 weeks. 🤖
 
 ### Tweet 9
 What worked well:
@@ -538,6 +542,203 @@ Current pricing: https://checkapi.io/pricing
 Thoughts on my strategy?
 
 Too cheap? Too expensive? Just right? 👇
+
+---
+
+## Thread 6: How I Used AI to 3x My Dev Speed 🤖
+
+### Tweet 1
+I built a SaaS in 6 weeks using an AI coding assistant.
+
+Not ChatGPT. Not Copilot.
+
+Something better: @OpenClaw
+
+Here's how it 3x'd my dev speed 🧵👇
+
+### Tweet 2
+What is OpenClaw?
+
+Think Claude, but it:
+- Writes actual files
+- Runs commands
+- Deploys to production
+- Manages Git
+- Fixes bugs
+- Handles the entire workflow
+
+Not just code suggestions. Actual execution.
+
+### Tweet 3
+Day 1-3: Backend (FastAPI)
+
+Me: "Build user auth with JWT"
+
+OpenClaw:
+✅ Created auth.py
+✅ Added JWT functions
+✅ Set up password hashing
+✅ Created login/register endpoints
+✅ Tested with curl
+
+Done in 2 hours. Normally takes 1 day.
+
+### Tweet 4
+Day 4-7: Celery Task Queue
+
+Me: "Set up Celery for scheduled health checks"
+
+OpenClaw:
+✅ Configured Celery + Redis
+✅ Created tasks.py
+✅ Implemented check_monitors task
+✅ Set up Beat scheduler
+✅ Tested background jobs
+
+Saved 2 days of debugging.
+
+### Tweet 5
+Day 8-11: Frontend (Next.js)
+
+Me: "Create dashboard with monitor list"
+
+OpenClaw:
+✅ Set up Next.js 14 project
+✅ Created components
+✅ Built API client
+✅ Added auth state management
+✅ Styled with Tailwind
+
+Front-end in 4 days (usually takes 2 weeks).
+
+### Tweet 6
+Day 12-13: Payment Integration
+
+Me: "Integrate LemonSqueezy"
+
+OpenClaw:
+✅ Set up webhook endpoint
+✅ Added signature verification
+✅ Implemented subscription logic
+✅ Fixed bugs
+✅ Tested end-to-end
+
+Payment flow working in 2 days.
+
+### Tweet 7
+The magic moments:
+
+"There's a bug in the webhook handler"
+→ OpenClaw reads logs, finds issue, fixes it
+
+"Deploy to Railway"
+→ OpenClaw configs env vars, pushes code, done
+
+"Update README"
+→ Professional docs in 5 minutes
+
+### Tweet 8
+What OpenClaw ISN'T:
+
+❌ Code autocomplete (that's Copilot)
+❌ Chat that gives code snippets
+❌ Something that makes you lazy
+
+What it IS:
+
+✅ AI pair programmer that executes
+✅ DevOps automation
+✅ Debugging assistant
+✅ Documentation writer
+
+### Tweet 9
+Productivity gains:
+
+Without AI: 3-4 months
+With OpenClaw: 6 weeks
+
+That's 3-4x faster.
+
+And I learned MORE (because I reviewed everything it built).
+
+### Tweet 10
+The controversial take:
+
+In 2026, if you're NOT using AI coding tools, you're at a massive disadvantage.
+
+It's like refusing to use Google in 2006.
+
+"But I prefer coding by hand!"
+
+Okay, but others will ship 3x faster. 🤷
+
+### Tweet 11
+Limitations (being honest):
+
+- Not perfect (I still reviewed everything)
+- Makes mistakes (but so do humans)
+- Needs guidance (you still need to know what to build)
+- Not magical (garbage in, garbage out)
+
+It's a TOOL, not a replacement.
+
+### Tweet 12
+Cost breakdown:
+
+OpenClaw: $20/month
+My time saved: ~200 hours
+Value of time: $50/hour (conservative)
+ROI: $10,000 saved for $20 spent
+
+That's 500x ROI.
+
+Best $20 I ever spent.
+
+### Tweet 13
+"But won't AI replace developers?"
+
+No.
+
+It replaces the BORING parts:
+- Boilerplate code
+- Config files
+- Deployment scripts
+- Debugging typos
+
+You still need to:
+- Design the system
+- Make decisions
+- Review code
+- Understand business logic
+
+### Tweet 14
+The future is hybrid:
+
+Human intelligence for:
+- Strategy
+- Architecture
+- User experience
+- Business decisions
+
+AI for:
+- Implementation
+- Testing
+- Deployment
+- Documentation
+
+Together = unstoppable.
+
+### Tweet 15
+Try it yourself:
+
+OpenClaw: https://openclaw.com
+My project: https://checkapi.io
+
+Questions about AI-assisted development?
+
+Ask away! 👇
+
+#buildinpublic #AI #coding
 
 ---
 

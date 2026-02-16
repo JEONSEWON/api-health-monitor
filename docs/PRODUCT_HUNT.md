@@ -93,6 +93,24 @@ As an indie hacker, I've used Pingdom, UptimeRobot, and other monitoring service
 
 I wanted something **simple, affordable, and modern**. So I built it.
 
+### How I built it (the interesting part! 🤖)
+
+I used **OpenClaw** - an AI coding assistant - to accelerate development.
+
+**What's OpenClaw?**  
+Think Claude/ChatGPT, but it actually executes code, manages files, deploys to production, and handles the entire dev workflow.
+
+**With OpenClaw's help, I:**
+- Built the entire backend (FastAPI + Celery) in 3 days
+- Created frontend (Next.js 14) in 4 days
+- Integrated payments (LemonSqueezy) in 2 days
+- Deployed to Railway & Vercel in 1 day
+- Fixed bugs and iterated rapidly
+
+**Total: 6 weeks from idea to launch** (would've taken 3-4 months solo)
+
+This is the future of indie hacking - AI pair programming that actually works. 🚀
+
 ### What it does
 
 Monitor your APIs 24/7 and get instant alerts when something goes down.

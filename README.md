@@ -16,6 +16,8 @@ API Health Monitor is a full-stack SaaS application that monitors your APIs and 
 
 **🌐 Live Demo:** [https://checkapi.io](https://checkapi.io)
 
+**🤖 Built with AI:** This entire project was built in 6 weeks using [OpenClaw](https://openclaw.com) - an AI coding assistant that actually executes code, deploys to production, and manages the entire development workflow. What would normally take 3-4 months was completed in 6 weeks thanks to AI-assisted development.
+
 ### ✨ Key Features
 
 - 🔄 **Automatic Health Checks** - Monitor APIs every 1-5 minutes
@@ -309,6 +311,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
+- [OpenClaw](https://openclaw.com/) - AI coding assistant that made this project possible in 6 weeks
 - [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
 - [Next.js](https://nextjs.org/) - React framework
 - [LemonSqueezy](https://lemonsqueezy.com/) - Payment processing
