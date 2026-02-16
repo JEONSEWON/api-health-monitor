@@ -162,7 +162,7 @@ export default function HomePage() {
             name="Business"
             price="$49"
             features={['Unlimited monitors', '10-second checks', 'API access', 'Custom features', 'SLA']}
-            cta="Contact Sales"
+            cta="Get Started"
             href="/register"
           />
         </div>
