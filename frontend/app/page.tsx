@@ -135,7 +135,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <PricingCard 
             name="Free"
             price="$0"
@@ -156,6 +156,13 @@ export default function HomePage() {
             price="$15"
             features={['100 monitors', '30-second checks', 'Team sharing', 'Priority support']}
             cta="Get Started"
+            href="/register"
+          />
+          <PricingCard 
+            name="Business"
+            price="$49"
+            features={['Unlimited monitors', '10-second checks', 'API access', 'Custom features', 'SLA']}
+            cta="Contact Sales"
             href="/register"
           />
         </div>
