@@ -1,0 +1,30 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept 1: Checkmark + Pulse Line -->
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#3B82F6" />
+  
+  <!-- Pulse Line -->
+  <path d="M 40 100 L 65 100 L 75 80 L 85 120 L 95 100 L 160 100" 
+        stroke="white" 
+        stroke-width="6" 
+        fill="none" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  
+  <!-- Checkmark -->
+  <path d="M 130 70 L 110 100 L 95 85" 
+        stroke="white" 
+        stroke-width="8" 
+        fill="none" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  
+  <!-- Text (optional) -->
+  <text x="100" y="175" 
+        font-family="Arial, sans-serif" 
+        font-size="24" 
+        font-weight="bold" 
+        fill="#1F2937" 
+        text-anchor="middle">CheckAPI</text>
+</svg>

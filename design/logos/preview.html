@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckAPI Logo Concepts Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .logo-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .logo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .logo-header {
+            margin-bottom: 20px;
+        }
+        
+        .logo-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1F2937;
+            margin-bottom: 5px;
+        }
+        
+        .logo-description {
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+        
+        .logo-preview {
+            background: #F9FAFB;
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            margin-bottom: 15px;
+            border: 2px solid #E5E7EB;
+        }
+        
+        .logo-preview img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .logo-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: #EEF2FF;
+            color: #4F46E5;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .tag.green {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .tag.purple {
+            background: #EDE9FE;
+            color: #5B21B6;
+        }
+        
+        .tag.blue {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+        
+        .dark-preview {
+            background: #111827;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 30px;
+        }
+        
+        .instructions h2 {
+            color: #1F2937;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .instructions li {
+            color: #4B5563;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .instructions li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+        
+        .color-palette {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .color-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .color-label {
+            font-size: 0.75rem;
+            color: #6B7280;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 CheckAPI Logo Concepts</h1>
+        <p class="subtitle">API Health Monitoring Service - 로고 시안 6종</p>
+        
+        <div class="grid">
+            <!-- Concept 1 -->
+            <div class="logo-card">
+                <div class="logo-header">
+                    <div class="logo-title">Concept 1: Checkmark + Pulse</div>
+                    <div class="logo-description">체크마크 + 맥박 라인</div>
+                </div>
+                <div class="logo-preview">
+                    <img src="logo-concept-1-checkmark.svg" alt="Concept 1">
+                </div>
+                <div class="logo-tags">
+                    <span class="tag blue">헬스 모니터링</span>
+                    <span class="tag blue">실시간 체크</span>
+                    <span class="tag blue">앱 아이콘 추천</span>
+                </div>
+            </div>
+            
+            <!-- Concept 2 -->
+            <div class="logo-card">
+                <div class="logo-header">
+                    <div class="logo-title">Concept 2: Shield</div>
+                    <div class="logo-description">방패 + API 브라켓 + 체크마크</div>
+                </div>
+                <div class="logo-preview">
+                    <img src="logo-concept-2-shield.svg" alt="Concept 2">
+                </div>
+                <div class="logo-tags">
+                    <span class="tag green">보안</span>
+                    <span class="tag green">안정성</span>
+                    <span class="tag green">기업용</span>
+                </div>
+            </div>
+            
+            <!-- Concept 3 -->
+            <div class="logo-card">
+                <div class="logo-header">
+                    <div class="logo-title">Concept 3: Minimal</div>
+                    <div class="logo-description">미니멀 라운드 스퀘어</div>
+                </div>
+                <div class="logo-preview">
+                    <img src="logo-concept-3-minimal.svg" alt="Concept 3">
+                </div>
+                <div class="logo-tags">
+                    <span class="tag purple">모던</span>
+                    <span class="tag purple">심플</span>
+                    <span class="tag purple">파비콘 추천</span>
+                </div>
+            </div>
+            
+            <!-- Concept 4 -->
+            <div class="logo-card">
+                <div class="logo-header">
+                    <div class="logo-title">Concept 4: Modern Gradient</div>
+                    <div class="logo-description">그라디언트 + 코드 브라켓</div>
+                </div>
+                <div class="logo-preview">
+                    <img src="logo-concept-4-modern.svg" alt="Concept 4">
+                </div>
+                <div class="logo-tags">
+                    <span class="tag purple">현대적</span>
+                    <span class="tag purple">개발자 친화적</span>
+                    <span class="tag purple">Product Hunt 추천</span>
+                </div>
+            </div>
+            
+            <!-- Concept 5 -->
+            <div class="logo-card">
+                <div class="logo-header">
+                    <div class="logo-title">Concept 5: Heartbeat Monitor</div>
+                    <div class="logo-description">모니터 화면 + 심전도 라인</div>
+                </div>
+                <div class="logo-preview dark-preview">
+                    <img src="logo-concept-5-heartbeat.svg" alt="Concept 5">
+                </div>
+                <div class="logo-tags">
+                    <span class="tag green">실시간 모니터링</span>
+                    <span class="tag green">기술적</span>
+                    <span class="tag green">대시보드 추천</span>
+                </div>
+            </div>
+            
+            <!-- Concept 6 -->
+            <div class="logo-card">
+                <div class="logo-header">
+                    <div class="logo-title">Concept 6: Simple Wordmark</div>
+                    <div class="logo-description">심플 아이콘 + 워드마크</div>
+                </div>
+                <div class="logo-preview">
+                    <img src="logo-concept-6-simple.svg" alt="Concept 6">
+                </div>
+                <div class="logo-tags">
+                    <span class="tag blue">깔끔</span>
+                    <span class="tag blue">전문적</span>
+                    <span class="tag blue">헤더 로고 추천</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 용도별 추천</h2>
+            <ul>
+                <li><strong>앱 아이콘 (512x512):</strong> Concept 1 또는 Concept 3 - 작은 사이즈에서도 인식 좋음</li>
+                <li><strong>웹사이트 헤더:</strong> Concept 6 - 가로 비율로 네비게이션 바에 적합</li>
+                <li><strong>SNS 프로필:</strong> Concept 1, 2, 3 - 원형 크롭되어도 잘 보임</li>
+                <li><strong>Product Hunt:</strong> Concept 4 - tagline 포함, 첫인상 효과적</li>
+                <li><strong>대시보드 헤더:</strong> Concept 5 - 기술적인 느낌</li>
+            </ul>
+            
+            <h2 style="margin-top: 30px;">🎨 컬러 팔레트</h2>
+            <div class="color-palette">
+                <div class="color-box">
+                    <div class="color-swatch" style="background: #3B82F6;"></div>
+                    <div class="color-label">#3B82F6<br>Primary Blue</div>
+                </div>
+                <div class="color-box">
+                    <div class="color-swatch" style="background: #10B981;"></div>
+                    <div class="color-label">#10B981<br>Success Green</div>
+                </div>
+                <div class="color-box">
+                    <div class="color-swatch" style="background: #8B5CF6;"></div>
+                    <div class="color-label">#8B5CF6<br>Purple</div>
+                </div>
+                <div class="color-box">
+                    <div class="color-swatch" style="background: #6366F1;"></div>
+                    <div class="color-label">#6366F1<br>Indigo</div>
+                </div>
+                <div class="color-box">
+                    <div class="color-swatch" style="background: #1F2937;"></div>
+                    <div class="color-label">#1F2937<br>Dark</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

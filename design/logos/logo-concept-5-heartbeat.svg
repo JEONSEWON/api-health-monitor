@@ -1,0 +1,39 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Concept 5: Heartbeat/Monitor Theme -->
+  
+  <!-- Monitor Screen -->
+  <rect x="40" y="50" width="120" height="80" rx="8" fill="#1F2937" stroke="#374151" stroke-width="3"/>
+  
+  <!-- Screen Display (dark) -->
+  <rect x="48" y="58" width="104" height="64" rx="4" fill="#111827"/>
+  
+  <!-- Heartbeat Line (green, like medical monitor) -->
+  <path d="M 55 90 L 70 90 L 77 75 L 84 105 L 91 90 L 100 90 L 107 80 L 114 100 L 121 90 L 145 90" 
+        stroke="#10B981" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  
+  <!-- Monitor Stand -->
+  <rect x="85" y="130" width="30" height="8" fill="#374151"/>
+  <rect x="70" y="138" width="60" height="4" rx="2" fill="#4B5563"/>
+  
+  <!-- Status Indicator (green dot) -->
+  <circle cx="145" cy="65" r="4" fill="#10B981">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Text -->
+  <text x="100" y="170" 
+        font-family="Arial, sans-serif" 
+        font-size="28" 
+        font-weight="bold" 
+        fill="#1F2937" 
+        text-anchor="middle">CheckAPI</text>
+  <text x="100" y="190" 
+        font-family="monospace" 
+        font-size="12" 
+        fill="#6B7280" 
+        text-anchor="middle">24/7 API Monitoring</text>
+</svg>
