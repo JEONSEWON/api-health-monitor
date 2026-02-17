@@ -35,7 +35,8 @@ Monitor your APIs and websites 24/7 with instant alerts via Email, Slack, Telegr
 🚀 Setup in 60 seconds (not 20 minutes)
 🎨 Modern UI built with Next.js 14 (2024 design, not 2010)
 💰 Affordable for indie hackers ($5-15/mo vs $25-100/mo enterprise tools)
-🔓 100% Open Source (MIT license)
+🔓 Open source for transparency (MIT license)
+🤖 Built in 6 weeks with OpenClaw AI coding assistant
 
 Track response times, uptime percentage, and incidents. Get alerted the second your API goes down.
 
@@ -116,10 +117,10 @@ Compare to enterprise tools:
 - Datadog: $100+/mo
 - Better Stack: $20+/mo
 
-**🔓 100% Open Source**
+**🔓 Open Source for Transparency**
 - MIT license
 - Full code on GitHub
-- Self-hostable if you want
+- Open for learning and contributions
 - Complete transparency
 
 **🔔 Multi-Channel Alerts**
@@ -131,8 +132,14 @@ Compare to enterprise tools:
 - **Frontend:** Next.js 14 + TypeScript + Tailwind CSS
 - **Deploy:** Railway (backend) + Vercel (frontend)
 - **Payment:** LemonSqueezy
+- **Development:** OpenClaw AI coding assistant
 
-Built everything from scratch in 6 weeks as a #buildinpublic project.
+## Built with AI 🤖
+I used **OpenClaw** - an AI coding assistant - to build this entire project in 6 weeks. What would traditionally take 3-4 months (or more), AI-assisted development made possible in 6 weeks.
+
+OpenClaw actually executes code, deploys to production, manages git, and handles the entire dev workflow. This is the future of indie hacking!
+
+#buildinpublic #AIcoding
 
 ## Key Features 🎯
 ✅ HTTP/HTTPS monitoring (GET, POST, PUT, DELETE, HEAD)
@@ -186,9 +193,10 @@ Modern API monitoring for indie hackers:
 ✅ Setup in 60 seconds
 ✅ $5-15/mo (not $75-100/mo)
 ✅ Built with Next.js 14 (2024 UI)
-✅ 100% Open Source (MIT)
+✅ Open Source (MIT)
+✅ Built in 6 weeks with AI 🤖
 
-Built in 6 weeks #buildinpublic 🧵👇
+#buildinpublic #AIcoding 🧵👇
 
 🔗 https://checkapi.io
 ```
@@ -249,26 +257,21 @@ No enterprise bloat. Just what you need.
 
 ---
 
-### Tweet 5/8 (Tech Stack)
+### Tweet 5/8 (Tech Stack + AI)
 ```
-Tech Stack 🛠️
+Tech Stack + AI 🛠️🤖
 
-Backend:
-- FastAPI (Python)
-- Celery + Redis
-- SQLAlchemy + SQLite
+Backend: FastAPI + Celery + Redis
+Frontend: Next.js 14 + TypeScript
+Deploy: Railway + Vercel
 
-Frontend:
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
+Built with @OpenClaw_AI - an AI coding assistant that actually executes code and deploys to production.
 
-Deploy:
-- Railway + Vercel
+6 weeks from idea to launch.
 
-Modern. Fast. Scalable.
+This is the future of indie hacking.
 
-⭐ Full code: github.com/JEONSEWON/api-health-monitor
+⭐ github.com/JEONSEWON/api-health-monitor
 ```
 
 ---
@@ -294,25 +297,24 @@ No VC funding. No BS pricing.
 
 ---
 
-### Tweet 7/8 (Open Source)
+### Tweet 7/8 (Open Source + AI Story)
 ```
-100% Open Source 🔓
+Open Source + AI-Powered 🔓🤖
 
-Every line of code on GitHub:
+Every line on GitHub:
 github.com/JEONSEWON/api-health-monitor
 
-MIT License.
-Fork it. Learn from it. Self-host it.
+MIT License. Built with @OpenClaw_AI.
 
-Built in public over 6 weeks:
+What took 6 weeks with AI would've taken 3-4 months traditionally:
 - 34 API endpoints
 - 5 alert channels
 - Full payment system
 - Celery scheduler
 
-Indie hacker life 💪
+This is indie hacking in 2026 💪
 
-#buildinpublic #opensource
+#buildinpublic #AIcoding
 ```
 
 ---
@@ -381,13 +383,19 @@ I wanted something I'd actually enjoy using as an indie hacker.
 **Open Source**
 - MIT License
 - Full code: https://github.com/JEONSEWON/api-health-monitor
-- Self-hostable
+- Open for transparency & contributions
 
 ## 🛠️ Tech Stack
 - **Backend:** FastAPI + Celery + Redis
 - **Frontend:** Next.js 14 + TypeScript + Tailwind CSS
 - **Deploy:** Railway (backend) + Vercel (frontend)
 - **Payment:** LemonSqueezy
+- **Development:** OpenClaw AI coding assistant
+
+## 🤖 Built with AI
+Built this entire project in 6 weeks using **OpenClaw** - an AI coding assistant that actually executes code, deploys to production, and manages the entire workflow.
+
+What would traditionally take 3-4 months was completed in 6 weeks thanks to AI-assisted development. This is the future of indie hacking!
 
 ## ✨ Features
 - 5 alert channels (Email, Slack, Telegram, Discord, Webhook)
