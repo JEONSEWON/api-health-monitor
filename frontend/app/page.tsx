@@ -75,7 +75,7 @@ export default function HomePage() {
           <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-8">
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold">Your Monitors</h3>
+                <h3 className="text-lg font-semibold text-gray-900">Your Monitors</h3>
                 <span className="text-sm text-green-600 font-medium">All systems operational ✓</span>
               </div>
               <div className="space-y-3">
