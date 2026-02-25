@@ -121,10 +121,10 @@ CheckAPI is a powerful yet simple **API health monitoring service** that tracks 
 |------|-------|----------|----------|----------|
 | **Free** | $0/month | 3 | 5 minutes | Email alerts, Public status page |
 | **Starter** | $5/month | 20 | 1 minute | All alert channels, Analytics |
-| **Pro** | $15/month | 100 | 30 seconds | Team sharing, Priority support |
-| **Business** | $49/month | Unlimited | 30 seconds | White-label, Advanced analytics |
+| **Pro** | $15/month | 100 | 30 seconds | Team sharing (Coming soon), Priority support |
+| **Business** | $49/month | Unlimited | 10 seconds | White-label, Advanced analytics |
 
-✅ All plans include unlimited team members  
+✅ Team collaboration features coming soon  
 ✅ No credit card required for free tier  
 ✅ Cancel anytime, no questions asked
 
