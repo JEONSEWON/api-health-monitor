@@ -8,7 +8,7 @@ export default function ContactPage() {
   const [status, setStatus] = useState('idle');
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('loading');
     try {
