@@ -3,25 +3,25 @@ import { ArrowRight, Calendar, Clock } from 'lucide-react';
 
 const posts = [
   {
-    title: 'Why API Monitoring Matters for Every Developer',
-    excerpt: 'Your API going down at 3am without you knowing is not a hypothetical — it happens. Here\'s why monitoring should be the first thing you set up after deploying.',
+    title: 'Best Free UptimeRobot Alternatives in 2026',
+    excerpt: 'UptimeRobot recently restricted commercial use on free plans. Here are the best alternatives that still offer genuinely free monitoring — no strings attached.',
     date: 'Feb 20, 2026',
-    readTime: '4 min read',
-    slug: '#',
-  },
-  {
-    title: 'How to Set Up Slack Alerts for Your API in 5 Minutes',
-    excerpt: 'Step-by-step guide to connecting CheckAPI with your Slack workspace so your team gets instant alerts the moment something goes wrong.',
-    date: 'Feb 10, 2026',
-    readTime: '3 min read',
-    slug: '#',
-  },
-  {
-    title: 'Free API Monitoring: What to Look For',
-    excerpt: 'Not all free monitoring plans are equal. Here\'s a breakdown of what actually matters when choosing a free tier — and what to watch out for.',
-    date: 'Jan 28, 2026',
     readTime: '5 min read',
-    slug: '#',
+    slug: '/blog/uptimerobot-alternatives',
+  },
+  {
+    title: 'How to Monitor Your API for Free (And Actually Get Alerted)',
+    excerpt: 'Free API monitoring sounds great until you realize most tools either limit you to 1 monitor or charge for alerts. Here\'s how to do it properly without paying a cent.',
+    date: 'Feb 10, 2026',
+    readTime: '4 min read',
+    slug: '/blog/free-api-monitoring',
+  },
+  {
+    title: 'How to Set Up Slack Alerts for API Downtime in 5 Minutes',
+    excerpt: 'Step-by-step guide to getting instant Slack notifications the moment your API goes down. No code required.',
+    date: 'Jan 28, 2026',
+    readTime: '3 min read',
+    slug: '/blog/slack-api-alerts',
   },
 ];
 
@@ -76,12 +76,12 @@ export default function BlogPage() {
                 <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{post.readTime}</span>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-3 hover:text-green-600 transition">
-                <a href={post.slug}>{post.title}</a>
+                <Link href={post.slug}>{post.title}</Link>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">{post.excerpt}</p>
-              <a href={post.slug} className="inline-flex items-center text-green-600 font-medium hover:text-green-700 transition">
+              <Link href={post.slug} className="inline-flex items-center text-green-600 font-medium hover:text-green-700 transition">
                 Read more <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
+              </Link>
             </article>
           ))}
         </div>
