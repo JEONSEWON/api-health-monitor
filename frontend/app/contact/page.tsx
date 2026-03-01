@@ -113,7 +113,7 @@ export default function ContactPage() {
               <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
               <textarea
                 rows={5}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition resize-none"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition resize-none text-gray-900"
                 placeholder="Tell us more..."
               />
             </div>
