@@ -139,7 +139,7 @@ export default function HomePage() {
           <PricingCard 
             name="Free"
             price="$0"
-            features={['10 monitors', '5-minute checks', 'All alert channels', 'Public status page']}
+            features={['3 monitors', '5-minute checks', 'Email alerts', 'Public status page']}
             cta="Start Free"
             href="/register"
           />

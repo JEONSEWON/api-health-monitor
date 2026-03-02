@@ -59,7 +59,7 @@ export default function PrivacyPage() {
 
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Data Retention</h2>
-            <p>Monitor check history is retained for 90 days on free plans and 1 year on paid plans. You may delete your account and all associated data at any time from your account settings.</p>
+            <p>Monitor check history is retained for 7 days on the Free plan, 30 days on Starter, 90 days on Pro, and 1 year on Business. You may delete your account and all associated data at any time from your account settings.</p>
           </div>
 
           <div>

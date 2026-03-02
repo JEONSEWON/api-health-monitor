@@ -13,6 +13,14 @@ from app.database import get_db
 from app.models import User, Monitor, Check
 from app.auth import get_current_user
 
+# Max data retention days per plan (must match tasks.py RETENTION_DAYS)
+PLAN_RETENTION_DAYS = {
+    "free": 7,
+    "starter": 30,
+    "pro": 90,
+    "business": 365,
+}
+
 router = APIRouter(prefix="/analytics", tags=["Analytics"])
 
 
@@ -79,13 +87,17 @@ def get_overview(
 @router.get("/monitors/{monitor_id}")
 def get_monitor_analytics(
     monitor_id: str,
-    days: int = Query(30, ge=1, le=90),
+    days: int = Query(30, ge=1, le=365),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """
     Get detailed analytics for a specific monitor
     """
+    # Clamp days to plan retention limit
+    max_days = PLAN_RETENTION_DAYS.get(current_user.plan, 7)
+    days = min(days, max_days)
+
     # Verify ownership
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,

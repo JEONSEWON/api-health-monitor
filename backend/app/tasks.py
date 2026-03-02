@@ -9,7 +9,15 @@ from sqlalchemy.orm import Session
 
 from app.celery_app import celery_app
 from app.database import SessionLocal, init_db
-from app.models import Monitor, Check
+from app.models import Monitor, Check, User
+
+# Data retention days per plan
+RETENTION_DAYS = {
+    "free": 7,
+    "starter": 30,
+    "pro": 90,
+    "business": 365,
+}
 
 # Initialize database tables on worker startup
 init_db()
@@ -254,23 +262,49 @@ def send_alerts(monitor_id: str, new_status: str, old_status: str):
 @celery_app.task(name="app.tasks.cleanup_old_checks")
 def cleanup_old_checks():
     """
-    Clean up old check records (older than 30 days)
-    Runs daily at 3 AM
+    Clean up old check records based on user plan retention policy.
+    Runs daily at 3 AM.
+
+    Retention policy:
+        free     ->  7 days
+        starter  -> 30 days
+        pro      -> 90 days
+        business -> 365 days
     """
     db = SessionLocal()
-    
+
     try:
-        cutoff_date = datetime.utcnow() - timedelta(days=30)
-        
-        deleted = db.query(Check).filter(
-            Check.checked_at < cutoff_date
-        ).delete()
-        
+        total_deleted = 0
+
+        for plan, days in RETENTION_DAYS.items():
+            cutoff_date = datetime.utcnow() - timedelta(days=days)
+
+            user_ids = [
+                u.id for u in db.query(User.id).filter(User.plan == plan).all()
+            ]
+            if not user_ids:
+                continue
+
+            monitor_ids = [
+                m.id for m in db.query(Monitor.id).filter(
+                    Monitor.user_id.in_(user_ids)
+                ).all()
+            ]
+            if not monitor_ids:
+                continue
+
+            deleted = db.query(Check).filter(
+                Check.monitor_id.in_(monitor_ids),
+                Check.checked_at < cutoff_date
+            ).delete(synchronize_session=False)
+
+            total_deleted += deleted
+            print(f"[cleanup] {plan} plan: deleted {deleted} checks older than {days} days")
+
         db.commit()
-        
-        print(f"Cleaned up {deleted} old checks")
-        
-        return {"deleted": deleted}
-        
+        print(f"[cleanup] Total deleted: {total_deleted} checks")
+
+        return {"deleted": total_deleted}
+
     finally:
         db.close()
