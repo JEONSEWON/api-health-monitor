@@ -147,21 +147,21 @@ export default function HomePage() {
             name="Starter"
             price="$5"
             popular
-            features={['20 monitors', '1-minute checks', 'All alert channels', 'Analytics', '30-day history']}
+            features={['20 monitors', '1-minute checks', 'All alert channels', 'Analytics', 'Keyword validation', 'SSL monitoring', '30-day history']}
             cta="Get Started"
             href="/register"
           />
           <PricingCard 
             name="Pro"
             price="$15"
-            features={['100 monitors', '30-second checks', 'Team sharing', 'Priority support', '90-day history']}
+            features={['100 monitors', '30-second checks', 'Team sharing', 'Keyword validation', 'SSL monitoring', '90-day history']}
             cta="Get Started"
             href="/register"
           />
           <PricingCard 
             name="Business"
             price="$49"
-            features={['Unlimited monitors', '10-second checks', 'API access', 'Custom features', 'SLA', '1-year history']}
+            features={['Unlimited monitors', '10-second checks', 'Team sharing', 'Keyword validation', 'SSL monitoring', '1-year history']}
             cta="Get Started"
             href="/register"
           />
