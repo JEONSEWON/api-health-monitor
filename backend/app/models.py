@@ -49,8 +49,13 @@ class Monitor(Base):
     body = Column(Text)  # for POST/PUT requests
     expected_status = Column(Integer, default=200)
     # Response body validation
-    keyword = Column(String(500))          # keyword to search in response body
-    keyword_present = Column(Boolean, default=True)  # True=must exist, False=must NOT exist
+    keyword = Column(String(500))
+    keyword_present = Column(Boolean, default=True)
+    # SSL monitoring
+    ssl_check = Column(Boolean, default=True)
+    ssl_expiry_days = Column(Integer, default=14)
+    ssl_expires_at = Column(DateTime)
+    ssl_last_checked = Column(DateTime)
     is_active = Column(Boolean, default=True)
     last_status = Column(String(20))  # up, down, degraded
     last_checked_at = Column(DateTime)

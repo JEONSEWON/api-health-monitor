@@ -40,4 +40,8 @@ celery_app.conf.beat_schedule = {
         "task": "app.tasks.cleanup_old_checks",
         "schedule": crontab(hour=3, minute=0),  # 3 AM daily
     },
+    "check-ssl-certificates": {
+        "task": "app.tasks.check_ssl_certificates",
+        "schedule": crontab(hour=9, minute=0),  # 9 AM daily
+    },
 }

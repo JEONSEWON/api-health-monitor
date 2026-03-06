@@ -3,8 +3,11 @@ Celery tasks for monitoring and alerts
 """
 
 import time
+import ssl
+import socket
 import requests
 from datetime import datetime, timedelta
+from urllib.parse import urlparse
 from sqlalchemy.orm import Session
 
 from app.celery_app import celery_app
@@ -18,6 +21,28 @@ RETENTION_DAYS = {
     "pro": 90,
     "business": 365,
 }
+
+def check_ssl_expiry(url: str):
+    """Returns SSL certificate expiry datetime. None if not HTTPS or error."""
+    try:
+        parsed = urlparse(url)
+        if parsed.scheme != "https":
+            return None
+        hostname = parsed.hostname
+        port = parsed.port or 443
+        ctx = ssl.create_default_context()
+        conn = ctx.wrap_socket(
+            socket.create_connection((hostname, port), timeout=10),
+            server_hostname=hostname
+        )
+        cert = conn.getpeercert()
+        conn.close()
+        expiry_str = cert["notAfter"]
+        return datetime.strptime(expiry_str, "%b %d %H:%M:%S %Y %Z")
+    except Exception as e:
+        print(f"[SSL] check error for {url}: {e}")
+        return None
+
 
 # Initialize database tables on worker startup
 init_db()
@@ -269,6 +294,64 @@ def send_alerts(monitor_id: str, new_status: str, old_status: str):
             "sent": sent_count
         }
         
+    finally:
+        db.close()
+
+
+@celery_app.task(name="app.tasks.check_ssl_certificates")
+def check_ssl_certificates():
+    """
+    Daily task: check SSL expiry for all active HTTPS monitors.
+    Alerts if certificate expires within ssl_expiry_days.
+    """
+    from app.alerts import (
+        send_email_alert, send_slack_alert, send_telegram_alert,
+        send_discord_alert, send_webhook_alert
+    )
+    db = SessionLocal()
+    try:
+        monitors = db.query(Monitor).filter(
+            Monitor.is_active == True,
+            Monitor.ssl_check == True,
+        ).all()
+
+        https_monitors = [m for m in monitors if m.url.startswith("https://")]
+        print(f"[SSL] Checking {len(https_monitors)} HTTPS monitors")
+
+        for monitor in https_monitors:
+            expiry_dt = check_ssl_expiry(monitor.url)
+            if expiry_dt is None:
+                continue
+
+            monitor.ssl_expires_at = expiry_dt
+            monitor.ssl_last_checked = datetime.utcnow()
+            days_left = (expiry_dt - datetime.utcnow()).days
+            print(f"[SSL] {monitor.name}: {days_left} days left")
+
+            if days_left <= monitor.ssl_expiry_days:
+                print(f"[SSL] ALERT: {monitor.name} expires in {days_left} days")
+                label = monitor.name + " [SSL]"
+                msg_new = "expires in " + str(days_left) + " days"
+                msg_old = "valid"
+                for channel in monitor.alert_channels:
+                    if not channel.is_active:
+                        continue
+                    try:
+                        if channel.type == "email":
+                            send_email_alert(channel.config, label, monitor.url, msg_new, msg_old)
+                        elif channel.type == "slack":
+                            send_slack_alert(channel.config, label, monitor.url, msg_new, msg_old)
+                        elif channel.type == "telegram":
+                            send_telegram_alert(channel.config, label, monitor.url, msg_new, msg_old)
+                        elif channel.type == "discord":
+                            send_discord_alert(channel.config, label, monitor.url, msg_new, msg_old)
+                        elif channel.type == "webhook":
+                            send_webhook_alert(channel.config, label, monitor.url, msg_new, msg_old, str(monitor.id))
+                    except Exception as e:
+                        print(f"[SSL] alert error: {e}")
+
+        db.commit()
+        return {"checked": len(https_monitors)}
     finally:
         db.close()
 
