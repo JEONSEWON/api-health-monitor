@@ -1,12 +1,13 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { teamsAPI } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
 
-export default function InvitePage() {
+function InviteContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user } = useAuthStore();
@@ -61,5 +62,17 @@ export default function InvitePage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function InvitePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-green-600" />
+      </div>
+    }>
+      <InviteContent />
+    </Suspense>
   );
 }
