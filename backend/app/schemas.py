@@ -60,6 +60,8 @@ class MonitorCreate(BaseModel):
     headers: Optional[Dict[str, str]] = None
     body: Optional[str] = None
     expected_status: int = Field(default=200, ge=100, le=599)
+    keyword: Optional[str] = Field(None, max_length=500)
+    keyword_present: bool = Field(default=True)
 
 
 class MonitorUpdate(BaseModel):
@@ -72,6 +74,8 @@ class MonitorUpdate(BaseModel):
     headers: Optional[Dict[str, str]] = None
     body: Optional[str] = None
     expected_status: Optional[int] = Field(None, ge=100, le=599)
+    keyword: Optional[str] = Field(None, max_length=500)
+    keyword_present: Optional[bool] = None
     is_active: Optional[bool] = None
 
 
@@ -86,6 +90,8 @@ class MonitorResponse(BaseModel):
     headers: Optional[Dict[str, str]]
     body: Optional[str]
     expected_status: int
+    keyword: Optional[str]
+    keyword_present: bool
     is_active: bool
     last_status: Optional[str]
     last_checked_at: Optional[datetime]

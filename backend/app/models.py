@@ -48,6 +48,9 @@ class Monitor(Base):
     headers = Column(JSON)  # custom headers
     body = Column(Text)  # for POST/PUT requests
     expected_status = Column(Integer, default=200)
+    # Response body validation
+    keyword = Column(String(500))          # keyword to search in response body
+    keyword_present = Column(Boolean, default=True)  # True=must exist, False=must NOT exist
     is_active = Column(Boolean, default=True)
     last_status = Column(String(20))  # up, down, degraded
     last_checked_at = Column(DateTime)

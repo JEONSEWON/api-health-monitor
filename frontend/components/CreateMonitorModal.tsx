@@ -19,6 +19,8 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
   const [timeout, setTimeout] = useState(30);
   const [expectedStatus, setExpectedStatus] = useState(200);
   const [isLoading, setIsLoading] = useState(false);
+  const [keyword, setKeyword] = useState('');
+  const [keywordPresent, setKeywordPresent] = useState(true);
 
   if (!isOpen) return null;
 
@@ -34,6 +36,7 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
         interval,
         timeout,
         expected_status: expectedStatus,
+        ...(keyword ? { keyword, keyword_present: keywordPresent } : {}),
       });
 
       toast.success('Monitor created successfully!');
@@ -53,6 +56,8 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
     setInterval(300);
     setTimeout(30);
     setExpectedStatus(200);
+    setKeyword('');
+    setKeywordPresent(true);
     onClose();
   };
 
@@ -179,6 +184,45 @@ export default function CreateMonitorModal({ isOpen, onClose, onSuccess }: Creat
                 onChange={(e) => setExpectedStatus(Number(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
               />
+            </div>
+
+            {/* Keyword Check */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Response Body Keyword <span className="text-gray-400 font-normal">(optional)</span>
+              </label>
+              <input
+                type="text"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-900"
+                placeholder='e.g. \status\:\ok'
+              />
+              {keyword && (
+                <div className="mt-2 flex gap-3">
+                  <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                    <input
+                      type="radio"
+                      checked={keywordPresent}
+                      onChange={() => setKeywordPresent(true)}
+                      className="text-green-600"
+                    />
+                    Must be present
+                  </label>
+                  <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                    <input
+                      type="radio"
+                      checked={!keywordPresent}
+                      onChange={() => setKeywordPresent(false)}
+                      className="text-green-600"
+                    />
+                    Must be absent
+                  </label>
+                </div>
+              )}
+              <p className="mt-1 text-xs text-gray-500">
+                Alert if this keyword is missing (or present) in the response body
+              </p>
             </div>
 
             {/* Buttons */}

@@ -99,13 +99,27 @@ def check_single_monitor(monitor_id: str):
             
             response_time_ms = int((time.time() - start_time) * 1000)
             
-            # Determine status
+            # Determine status - step 1: status code check
             if response.status_code == monitor.expected_status:
                 status = "up"
                 error_message = None
             else:
                 status = "degraded"
                 error_message = f"Expected status {monitor.expected_status}, got {response.status_code}"
+
+            # Step 2: keyword check in response body (only if status code passed)
+            if status == "up" and monitor.keyword:
+                try:
+                    body_text = response.text
+                    keyword_found = monitor.keyword in body_text
+                    if monitor.keyword_present and not keyword_found:
+                        status = "degraded"
+                        error_message = f"Keyword '{monitor.keyword}' not found in response body"
+                    elif not monitor.keyword_present and keyword_found:
+                        status = "degraded"
+                        error_message = f"Keyword '{monitor.keyword}' found in response body (expected absent)"
+                except Exception as e:
+                    print(f"Keyword check error: {e}")
             
             # Create check record
             check = Check(
