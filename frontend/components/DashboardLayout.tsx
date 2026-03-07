@@ -3,16 +3,9 @@
 import { useAuthStore } from '@/lib/store';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { 
-  Activity, 
-  Bell, 
-  BarChart3, 
-  Settings, 
-  LogOut,
-  Menu,
-  X
-} from 'lucide-react';
-import { useState } from 'react';
+import { Activity, Bell, BarChart3, Settings, LogOut, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { authAPI } from '@/lib/api';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -21,8 +14,24 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, logout } = useAuthStore();
+  const { user, setUser, logout } = useAuthStore();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // 새로고침 시 user 복원
+  useEffect(() => {
+    if (!user) {
+      const token = localStorage.getItem('access_token');
+      if (!token) {
+        router.push('/login');
+        return;
+      }
+      authAPI.me()
+        .then((userData) => setUser(userData))
+        .catch(() => {
+          router.push('/login');
+        });
+    }
+  }, [user, setUser, router]);
 
   const handleLogout = () => {
     logout();
@@ -40,28 +49,35 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="min-h-screen bg-gray-50">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-gray-600 bg-opacity-75 z-20 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <div className={`
-        fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
+      <div
+        className={`
+          fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200
+          transform transition-transform duration-300 ease-in-out
+          lg:translate-x-0
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-            <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition cursor-pointer">
-              <img 
-                src="/logo.jpg" 
-                alt="CheckAPI Logo" 
+            <Link
+              href="/"
+              className="flex items-center space-x-3 hover:opacity-80 transition cursor-pointer"
+            >
+              <img
+                src="/logo.jpg"
+                alt="CheckAPI Logo"
                 className="h-10 w-10 rounded-lg object-cover"
               />
               <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                API Monitor
+                CheckAPI
               </span>
             </Link>
             <button
@@ -82,8 +98,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   href={item.href}
                   className={`
                     flex items-center px-4 py-3 text-sm font-medium rounded-lg transition
-                    ${isActive 
-                      ? 'bg-green-50 text-green-600' 
+                    ${isActive
+                      ? 'bg-green-50 text-green-600'
                       : 'text-gray-700 hover:bg-gray-50'
                     }
                   `}
@@ -105,12 +121,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   </span>
                 </div>
               </div>
-              <div className="ml-3 flex-1">
+              <div className="ml-3 flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">
                   {user?.name || user?.email}
                 </p>
                 <p className="text-xs text-gray-500 capitalize">
-                  {user?.plan} plan
+                  {user?.plan ? `${user.plan} plan` : '...'}
                 </p>
               </div>
               <button
@@ -136,14 +152,15 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             >
               <Menu className="h-6 w-6" />
             </button>
-            
             <div className="flex-1 flex justify-end">
-              <Link
-                href="/dashboard/settings"
-                className="text-sm text-gray-700 hover:text-green-600 transition"
-              >
-                Upgrade to Pro →
-              </Link>
+              {user?.plan === 'free' && (
+                <Link
+                  href="/dashboard/settings"
+                  className="text-sm text-gray-700 hover:text-green-600 transition"
+                >
+                  Upgrade to Pro →
+                </Link>
+              )}
             </div>
           </div>
         </header>
