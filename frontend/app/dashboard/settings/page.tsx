@@ -38,7 +38,6 @@ export default function SettingsPage() {
 
   const handleCancel = async () => {
     if (!confirm('Are you sure you want to cancel your subscription?')) return;
-
     try {
       await subscriptionAPI.cancel();
       toast.success('Subscription cancelled');
@@ -52,18 +51,57 @@ export default function SettingsPage() {
     {
       name: 'Free',
       price: '$0',
-      features: ['3 monitors', '5-minute checks', 'Email alerts', 'Public status page'],
+      features: [
+        '10 monitors',
+        '5-minute checks',
+        'All alert channels',
+        'Public status page',
+        'Keyword validation',
+        'SSL monitoring',
+        '7-day history',
+      ],
     },
     {
       name: 'Starter',
       price: '$5',
-      features: ['20 monitors', '1-minute checks', 'All alert channels', 'Analytics'],
+      features: [
+        '20 monitors',
+        '1-minute checks',
+        'All alert channels',
+        'Analytics',
+        'Keyword validation',
+        'SSL monitoring',
+        '30-day history',
+      ],
       popular: true,
     },
     {
       name: 'Pro',
       price: '$15',
-      features: ['100 monitors', '30-second checks', 'Team sharing', 'Priority support'],
+      features: [
+        '100 monitors',
+        '30-second checks',
+        'All alert channels',
+        'Analytics',
+        'Team sharing (5 members)',
+        'Keyword validation',
+        'SSL monitoring',
+        '90-day history',
+      ],
+    },
+    {
+      name: 'Business',
+      price: '$49',
+      features: [
+        'Unlimited monitors',
+        '10-second checks',
+        'All alert channels',
+        'Analytics',
+        'Team sharing (unlimited)',
+        'Keyword validation',
+        'SSL monitoring',
+        '1-year history',
+      ],
     },
   ];
 
@@ -102,7 +140,7 @@ export default function SettingsPage() {
         {/* Pricing Plans */}
         <div>
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Upgrade Your Plan</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {plans.map((plan) => (
               <PlanCard
                 key={plan.name}
@@ -135,10 +173,12 @@ function PlanCard({ plan, currentPlan, onUpgrade }: any) {
   const isCurrent = plan.name.toLowerCase() === currentPlan;
 
   return (
-    <div className={`
-      bg-white rounded-lg border-2 p-6
-      ${plan.popular ? 'border-green-600 shadow-lg' : 'border-gray-200'}
-    `}>
+    <div
+      className={`
+        bg-white rounded-lg border-2 p-6
+        ${plan.popular ? 'border-green-600 shadow-lg' : 'border-gray-200'}
+      `}
+    >
       {plan.popular && (
         <span className="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
           POPULAR
@@ -169,9 +209,10 @@ function PlanCard({ plan, currentPlan, onUpgrade }: any) {
           onClick={() => onUpgrade(plan.name.toLowerCase())}
           className={`
             w-full py-2 rounded-lg font-medium transition
-            ${plan.popular
-              ? 'bg-green-600 text-white hover:bg-green-700'
-              : 'border-2 border-green-600 text-green-600 hover:bg-green-50'
+            ${
+              plan.popular
+                ? 'bg-green-600 text-white hover:bg-green-700'
+                : 'border-2 border-green-600 text-green-600 hover:bg-green-50'
             }
           `}
         >
