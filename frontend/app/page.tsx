@@ -39,23 +39,26 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
+          <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <span>✓</span> Free for Commercial Use — No restrictions
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Monitor Your APIs
+            API Monitoring That
             <br />
             <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-              24/7 Uptime Tracking
+              Won&apos;t Block Your Business
             </span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Get instant alerts when your APIs go down. Simple setup, powerful monitoring, 
-            and affordable pricing for developers and teams.
+            Unlike UptimeRobot, CheckAPI&apos;s free plan has zero commercial-use restrictions.
+            Monitor your production APIs, get instant alerts, and detect failures even when status code is 200.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               href="/register"
               className="inline-flex items-center justify-center bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition text-lg font-medium"
             >
-              Start Free Trial
+              Start Free — No Credit Card
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link 
@@ -66,7 +69,7 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="text-sm text-gray-500 mt-4">
-            Free plan available • No credit card required • Cancel anytime
+            10 monitors free • Commercial use allowed • No credit card required
           </p>
         </div>
 
@@ -147,21 +150,21 @@ export default function HomePage() {
             name="Starter"
             price="$5"
             popular
-            features={['20 monitors', '1-minute checks', 'All alert channels', 'Analytics', 'Keyword validation', 'SSL monitoring', '30-day history']}
+            features={['20 monitors', '1-minute checks', 'All alert channels', 'Analytics', '30-day history']}
             cta="Get Started"
             href="/register"
           />
           <PricingCard 
             name="Pro"
             price="$15"
-            features={['100 monitors', '30-second checks', 'Team sharing', 'Keyword validation', 'SSL monitoring', '90-day history']}
+            features={['100 monitors', '30-second checks', 'Team sharing', 'Priority support', '90-day history']}
             cta="Get Started"
             href="/register"
           />
           <PricingCard 
             name="Business"
             price="$49"
-            features={['Unlimited monitors', '10-second checks', 'Team sharing', 'Keyword validation', 'SSL monitoring', '1-year history']}
+            features={['Unlimited monitors', '10-second checks', 'API access', 'Custom features', 'SLA', '1-year history']}
             cta="Get Started"
             href="/register"
           />
