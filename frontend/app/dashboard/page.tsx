@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuthStore } from '@/lib/store';
 import { authAPI, monitorsAPI, analyticsAPI, alertChannelsAPI } from '@/lib/api';
 import DashboardLayout from '@/components/DashboardLayout';
@@ -84,21 +85,32 @@ export default function DashboardPage() {
         </div>
 
         {/* AI Banner */}
-        {showAIBanner && (monitors.length === 0 || monitors.some(m => m.status === 'down' || m.status === 'degraded')) && (
-          <div className="flex items-start gap-3 rounded-lg border border-yellow-200 bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-700/40 px-4 py-3">
-            <span className="text-yellow-600 dark:text-yellow-400 text-lg leading-none mt-0.5">✦</span>
-            <p className="flex-1 text-sm text-yellow-800 dark:text-yellow-300">
-              AI가 장애 원인을 자동으로 분석합니다. 체크 히스토리에서 AI 분석 결과를 확인하세요.
-            </p>
-            <button
-              onClick={() => setShowAIBanner(false)}
-              className="text-yellow-500 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-200 transition text-lg leading-none"
-              aria-label="닫기"
-            >
-              ×
-            </button>
-          </div>
-        )}
+        {showAIBanner && (monitors.length === 0 || monitors.some(m => m.status === 'down' || m.status === 'degraded')) && (() => {
+          const downMonitor = monitors.find(m => m.status === 'down' || m.status === 'degraded');
+          return (
+            <div className="flex items-start gap-3 rounded-lg border border-yellow-200 bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-700/40 px-4 py-3">
+              <span className="text-yellow-600 dark:text-yellow-400 text-lg leading-none mt-0.5">✦</span>
+              <p className="flex-1 text-sm text-yellow-800 dark:text-yellow-300">
+                AI가 장애 원인을 자동으로 분석합니다. 체크 히스토리에서 AI 분석 결과를 확인하세요.
+                {downMonitor && (
+                  <Link
+                    href={`/dashboard/monitors/${downMonitor.id}?tab=history`}
+                    className="ml-2 font-medium underline underline-offset-2 hover:text-yellow-900 dark:hover:text-yellow-100 transition"
+                  >
+                    결과 보기 →
+                  </Link>
+                )}
+              </p>
+              <button
+                onClick={() => setShowAIBanner(false)}
+                className="text-yellow-500 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-200 transition text-lg leading-none"
+                aria-label="닫기"
+              >
+                ×
+              </button>
+            </div>
+          );
+        })()}
 
         {/* Stats */}
         {overview && (

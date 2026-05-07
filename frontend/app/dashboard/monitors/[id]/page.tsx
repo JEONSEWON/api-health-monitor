@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
 import { monitorsAPI, analyticsAPI, alertChannelsAPI } from '@/lib/api';
 import AssertionsPanel from '@/components/AssertionsPanel';
@@ -29,6 +29,7 @@ import { formatDistanceToNow } from 'date-fns';
 export default function MonitorDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const monitorId = params.id as string;
 
   const user = useAuthStore((state) => state.user);
@@ -45,7 +46,9 @@ export default function MonitorDetailPage() {
   const [allChannels, setAllChannels] = useState<any[]>([]);
   const [linkedChannels, setLinkedChannels] = useState<any[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'assertions' | 'alerts' | 'history'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'assertions' | 'alerts' | 'history'>(
+    (searchParams.get('tab') as any) || 'overview'
+  );
   const [editForm, setEditForm] = useState<any>(null);
   const [editLoading, setEditLoading] = useState(false);
 
