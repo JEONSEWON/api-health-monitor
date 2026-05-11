@@ -51,6 +51,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def public_cors(request: Request, call_next):
+    """Allow all origins for public (unauthenticated) routes — needed for custom domain status pages."""
+    response = await call_next(request)
+    if request.url.path.startswith("/api/v1/public/"):
+        response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
 
 # Include routers
 from app.routers import monitors, alert_channels, subscriptions, public, analytics, teams, api_keys, ai

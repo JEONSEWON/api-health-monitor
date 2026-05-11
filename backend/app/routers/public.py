@@ -53,11 +53,11 @@ def get_incidents(monitor_id: str, hours: int, db: Session) -> List[Dict[str, An
     """Get recent incidents (status changes to down/degraded)"""
     since = datetime.utcnow() - timedelta(hours=hours)
     
-    # Get all checks in reverse chronological order
+    # Load at most 5000 checks — enough to find 10 incidents even at 30s intervals
     checks = db.query(Check).filter(
         Check.monitor_id == monitor_id,
         Check.checked_at >= since
-    ).order_by(Check.checked_at).all()
+    ).order_by(Check.checked_at).limit(5000).all()
     
     incidents = []
     in_incident = False

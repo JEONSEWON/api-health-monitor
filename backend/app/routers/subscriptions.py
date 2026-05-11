@@ -216,6 +216,9 @@ async def lemonsqueezy_webhook(request: Request, db: Session = Depends(get_db)):
     body = await request.body()
     
     # Verify signature
+    if not settings.LEMONSQUEEZY_WEBHOOK_SECRET:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Webhook secret not configured")
+
     expected_signature = hmac.new(
         settings.LEMONSQUEEZY_WEBHOOK_SECRET.encode(),
         body,
@@ -273,92 +276,88 @@ async def lemonsqueezy_webhook(request: Request, db: Session = Depends(get_db)):
         return {"message": "User not found"}
     
     # Handle different events
-    if event_name == "subscription_created":
-        # Check if subscription already exists (webhook may be resent)
-        existing_sub = db.query(Subscription).filter(
-            Subscription.user_id == user.id
-        ).first()
-        
-        if existing_sub:
-            # Update existing subscription
-            existing_sub.lemonsqueezy_subscription_id = lemonsqueezy_subscription_id
-            existing_sub.plan = plan
-            existing_sub.status = "active"
-            existing_sub.current_period_end = datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
-            print(f"🔄 Updated existing subscription for user {user.email}: {plan}")
-        else:
-            # Create new subscription
-            subscription = Subscription(
-                user_id=user.id,
-                lemonsqueezy_subscription_id=lemonsqueezy_subscription_id,
-                plan=plan,
-                status="active",
-                current_period_end=datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
-            )
-            db.add(subscription)
-            print(f"✅ Subscription created for user {user.email}: {plan}")
-        
-        # Update user plan
-        user.plan = plan
-        
-        db.commit()
-    
-    elif event_name == "subscription_updated":
-        # Update subscription
-        subscription = db.query(Subscription).filter(
-            Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
-        ).first()
-        
-        if subscription:
-            subscription.status = status_ls
-            subscription.current_period_end = datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
-            
-            # Update plan if changed
-            if plan:
-                subscription.plan = plan
-                user.plan = plan
-            
-            db.commit()
-            print(f"✅ Subscription updated for user {user.email}")
-    
-    elif event_name == "subscription_cancelled":
-        # LemonSqueezy fires this immediately on cancel — user still has access until period ends
-        subscription = db.query(Subscription).filter(
-            Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
-        ).first()
+    processing_error = None
+    try:
+        if event_name == "subscription_created":
+            existing_sub = db.query(Subscription).filter(
+                Subscription.user_id == user.id
+            ).first()
 
-        if subscription:
-            subscription.status = "canceling"
-            subscription.current_period_end = datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else subscription.current_period_end
-            db.commit()
-            print(f"✅ Subscription canceling for user {user.email}, access until {subscription.current_period_end}")
+            if existing_sub:
+                existing_sub.lemonsqueezy_subscription_id = lemonsqueezy_subscription_id
+                existing_sub.plan = plan
+                existing_sub.status = "active"
+                existing_sub.current_period_end = datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
+                print(f"🔄 Updated existing subscription for user {user.email}: {plan}")
+            else:
+                subscription = Subscription(
+                    user_id=user.id,
+                    lemonsqueezy_subscription_id=lemonsqueezy_subscription_id,
+                    plan=plan,
+                    status="active",
+                    current_period_end=datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
+                )
+                db.add(subscription)
+                print(f"✅ Subscription created for user {user.email}: {plan}")
 
-    elif event_name == "subscription_expired":
-        # Period actually ended — now downgrade
-        subscription = db.query(Subscription).filter(
-            Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
-        ).first()
-
-        if subscription:
-            subscription.status = "expired"
+            user.plan = plan
             db.commit()
 
-            user.plan = "free"
-            db.commit()
-            enforce_plan_constraints(user, db)
-            print(f"✅ Subscription expired for user {user.email}, downgraded to free")
-    
-    elif event_name == "subscription_resumed":
-        # Resume subscription
-        subscription = db.query(Subscription).filter(
-            Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
-        ).first()
-        
-        if subscription:
-            subscription.status = "active"
-            user.plan = subscription.plan
-            db.commit()
-            print(f"✅ Subscription resumed for user {user.email}")
+        elif event_name == "subscription_updated":
+            subscription = db.query(Subscription).filter(
+                Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
+            ).first()
+
+            if subscription:
+                subscription.status = status_ls
+                subscription.current_period_end = datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else None
+
+                if plan:
+                    subscription.plan = plan
+                    user.plan = plan
+
+                db.commit()
+                print(f"✅ Subscription updated for user {user.email}")
+
+        elif event_name == "subscription_cancelled":
+            subscription = db.query(Subscription).filter(
+                Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
+            ).first()
+
+            if subscription:
+                subscription.status = "canceling"
+                subscription.current_period_end = datetime.fromisoformat(ends_at.replace("Z", "+00:00")) if ends_at else subscription.current_period_end
+                db.commit()
+                print(f"✅ Subscription canceling for user {user.email}, access until {subscription.current_period_end}")
+
+        elif event_name == "subscription_expired":
+            subscription = db.query(Subscription).filter(
+                Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
+            ).first()
+
+            if subscription:
+                subscription.status = "expired"
+                db.commit()
+
+                user.plan = "free"
+                enforce_plan_constraints(user, db)
+                print(f"✅ Subscription expired for user {user.email}, downgraded to free")
+
+        elif event_name == "subscription_resumed":
+            subscription = db.query(Subscription).filter(
+                Subscription.lemonsqueezy_subscription_id == lemonsqueezy_subscription_id
+            ).first()
+
+            if subscription:
+                subscription.status = "active"
+                user.plan = subscription.plan
+                db.commit()
+                print(f"✅ Subscription resumed for user {user.email}")
+
+    except Exception as e:
+        processing_error = str(e)
+        print(f"⚠️ Webhook processing error ({event_name}): {e}")
+        db.rollback()
 
     # Persist webhook event for audit/debugging
     log = WebhookLog(
@@ -366,9 +365,12 @@ async def lemonsqueezy_webhook(request: Request, db: Session = Depends(get_db)):
         lemonsqueezy_subscription_id=str(lemonsqueezy_subscription_id) if lemonsqueezy_subscription_id else None,
         user_id=str(user.id) if user else None,
         payload=data,
-        success=True,
+        success=processing_error is None,
     )
     db.add(log)
     db.commit()
+
+    if processing_error:
+        raise HTTPException(status_code=500, detail=f"Webhook processing failed: {processing_error}")
 
     return {"message": "Webhook processed"}

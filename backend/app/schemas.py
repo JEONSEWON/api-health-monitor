@@ -56,7 +56,7 @@ class MonitorCreate(BaseModel):
     name: str = Field(max_length=255)
     url: HttpUrl
     method: str = Field(default="GET", pattern="^(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH)$")
-    interval: int = Field(default=300, ge=60, le=3600)  # 1 min to 1 hour
+    interval: int = Field(default=300, ge=10, le=3600)  # 10s (Business) to 1 hour
     timeout: int = Field(default=30, ge=5, le=120)
     headers: Optional[Dict[str, str]] = None
     body: Optional[str] = None
@@ -75,7 +75,7 @@ class MonitorUpdate(BaseModel):
     name: Optional[str] = Field(None, max_length=255)
     url: Optional[HttpUrl] = None
     method: Optional[str] = Field(None, pattern="^(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH)$")
-    interval: Optional[int] = Field(None, ge=60, le=3600)
+    interval: Optional[int] = Field(None, ge=10, le=3600)
     timeout: Optional[int] = Field(None, ge=5, le=120)
     headers: Optional[Dict[str, str]] = None
     body: Optional[str] = None

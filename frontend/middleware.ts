@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
     const { monitor_id } = await res.json();
     return NextResponse.rewrite(new URL(`/status/${monitor_id}`, request.url));
   } catch {
-    return NextResponse.next();
+    return NextResponse.rewrite(new URL('/not-found', request.url));
   }
 }
 

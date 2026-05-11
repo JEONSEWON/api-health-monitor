@@ -528,7 +528,7 @@ def check_heartbeat_monitors():
             elapsed = (now - monitor.last_ping_at).total_seconds() / 60
 
             if elapsed > threshold_minutes:
-                if monitor.last_status != "down":
+                if monitor.last_status not in ("down", None):
                     previous_status = monitor.last_status
                     monitor.last_status = "down"
                     monitor.last_checked_at = now

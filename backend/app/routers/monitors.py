@@ -71,7 +71,10 @@ def get_effective_owner(current_user: User, db: Session) -> User:
     """팀 멤버인 경우 오너 User 객체 반환"""
     owner_id = get_effective_owner_id(current_user, db)
     if owner_id != current_user.id:
-        return db.query(User).filter(User.id == owner_id).first()
+        owner = db.query(User).filter(User.id == owner_id).first()
+        if not owner:
+            raise HTTPException(status_code=404, detail="Team owner not found")
+        return owner
     return current_user
 
 
@@ -141,9 +144,12 @@ def create_monitor(
     """
     Create a new monitor
     """
-    # Lock the user row to prevent TOCTOU: concurrent requests could both pass the
-    # plan limit check before either inserts, allowing limit bypass.
-    locked_user = db.query(User).filter(User.id == current_user.id).with_for_update().first()
+    # Lock the effective owner row to prevent TOCTOU race condition.
+    # Team members are checked against the owner's plan and monitor count.
+    owner_id = get_effective_owner_id(current_user, db)
+    locked_user = db.query(User).filter(User.id == owner_id).with_for_update().first()
+    if not locked_user:
+        raise HTTPException(status_code=404, detail="User not found")
     check_plan_limits(locked_user, db, creating_new=True)
 
     # Validate interval
@@ -444,11 +450,11 @@ def set_custom_domain(
     domain = (payload.get("custom_domain") or "").strip().lower() or None
 
     if domain:
-        # Check uniqueness across all monitors
+        # Check uniqueness with row lock to prevent race condition
         conflict = db.query(Monitor).filter(
             Monitor.custom_domain == domain,
             Monitor.id != monitor_id
-        ).first()
+        ).with_for_update().first()
         if conflict:
             raise HTTPException(status_code=409, detail="Domain already in use by another monitor")
 

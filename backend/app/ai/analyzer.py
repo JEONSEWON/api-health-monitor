@@ -112,6 +112,8 @@ def analyze_incident(
             }],
         )
 
+        if not message.content:
+            return None
         text = message.content[0].text.strip()
         if text.startswith("```"):
             text = text.split("```")[1]
