@@ -712,4 +712,16 @@ export default function HomePage() {
                       {label}
                     </Link>
                   </li>
-               
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div style={{ maxWidth: '1100px', margin: '40px auto 0', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.04)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '12px', color: '#475569' }}>© 2026 Axiom Technologies. All rights reserved.</span>
+          <span style={{ fontSize: '12px', color: '#475569' }}>Built by a solo dev from Seoul 🇰🇷</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
