@@ -52,14 +52,6 @@ def check_ssl_expiry(url: str):
 init_db()
 
 
-def get_db():
-    """Get database session"""
-    db = SessionLocal()
-    try:
-        return db
-    finally:
-        db.close()
-
 
 @celery_app.task(name="app.tasks.check_monitors")
 def check_monitors():
@@ -148,6 +140,7 @@ def check_single_monitor(monitor_id: str):
                 error_message = f"Expected status {monitor.expected_status}, got {response.status_code}"
 
             # Step 2: assertions check (keyword/regex/jsonpath)
+            has_assertions = False
             if status == "up":
                 try:
                     from app.models import MonitorAssertion
@@ -158,6 +151,7 @@ def check_single_monitor(monitor_id: str):
                     ).order_by(MonitorAssertion.order).all()
 
                     if assertions:
+                        has_assertions = True
                         result = run_assertions(response.text, assertions, dict(response.headers))
                         if not result["passed"]:
                             status = "degraded"
@@ -167,15 +161,11 @@ def check_single_monitor(monitor_id: str):
                                 error_message = f"Assertion failed: {f['path']} {f['operator']} {f['expected']} (got: {f['actual']})"
                             else:
                                 error_message = "Assertion failed"
-                    elif monitor.keyword:
-                        # Legacy keyword/regex fallback
-                        pass
                 except Exception as e:
                     print(f"Assertion check error: {e}")
 
             # Step 2b: legacy keyword/regex check (only if no assertions defined)
-            # Step 2: keyword/regex check in response body (only if status code passed)
-            if status == "up" and monitor.keyword:
+            if status == "up" and monitor.keyword and not has_assertions:
                 try:
                     body_text = response.text
                     use_regex = getattr(monitor, 'use_regex', False)
@@ -561,7 +551,7 @@ def cleanup_old_checks():
     Runs daily at 3 AM.
 
     Retention policy:
-        free     ->  7 days
+        free     -> 30 days
         starter  -> 30 days
         pro      -> 90 days
         business -> 365 days

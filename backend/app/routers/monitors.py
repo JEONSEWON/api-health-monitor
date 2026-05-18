@@ -1,4 +1,3 @@
-import secrets
 """
 Monitor management routes: CRUD operations for monitors
 """
