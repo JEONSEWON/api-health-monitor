@@ -475,4 +475,13 @@ def set_custom_domain(
 def get_custom_domain(
     monitor_id: str,
     current_user: User = Depends(get_current_user_flexible),
-    db:
+    db: Session = Depends(get_db)
+):
+    owner = get_effective_owner(current_user, db)
+    monitor = db.query(Monitor).filter(
+        Monitor.id == monitor_id,
+        Monitor.user_id == owner.id
+    ).first()
+    if not monitor:
+        raise HTTPException(status_code=404, detail="Monitor not found")
+    return {"custom_domain": monitor.custom_domain}
