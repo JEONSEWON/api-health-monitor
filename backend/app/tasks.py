@@ -436,10 +436,6 @@ def check_ssl_certificates():
     Daily task: check SSL expiry for all active HTTPS monitors.
     Alerts if certificate expires within ssl_expiry_days.
     """
-    from app.alerts import (
-        send_email_alert, send_slack_alert, send_telegram_alert,
-        send_discord_alert, send_webhook_alert
-    )
     db = SessionLocal()
     try:
         monitors = db.query(Monitor).filter(
@@ -468,19 +464,12 @@ def check_ssl_certificates():
                 for channel in monitor.alert_channels:
                     if not channel.is_active:
                         continue
-                    try:
-                        if channel.type == "email":
-                            send_email_alert(channel.config, label, monitor.url, msg_new, msg_old)
-                        elif channel.type == "slack":
-                            send_slack_alert(channel.config, label, monitor.url, msg_new, msg_old)
-                        elif channel.type == "telegram":
-                            send_telegram_alert(channel.config, label, monitor.url, msg_new, msg_old)
-                        elif channel.type == "discord":
-                            send_discord_alert(channel.config, label, monitor.url, msg_new, msg_old)
-                        elif channel.type == "webhook":
-                            send_webhook_alert(channel.config, label, monitor.url, msg_new, msg_old, str(monitor.id))
-                    except Exception as e:
-                        print(f"[SSL] alert error: {e}")
+                    send_channel_alert.delay(
+                        channel.type, channel.config,
+                        label, monitor.url,
+                        msg_new, msg_old,
+                        str(monitor.id),
+                    )
 
         db.commit()
         return {"checked": len(https_monitors)}
