@@ -205,12 +205,28 @@ async def analyze_endpoint(url: str) -> dict:
 
         result = json.loads(text)
 
+        _op_map = {"equals": "==", "not_equals": "!=", "equal": "=="}
+        raw_assertions = result.get("assertions") or []
+        normalized = []
+        for a in raw_assertions:
+            if not isinstance(a, dict):
+                continue
+            op = a.get("operator", "==")
+            normalized.append({
+                "assertion_type": "jsonpath",
+                "path": a.get("path", ""),
+                "operator": _op_map.get(op, op),
+                "value": str(a.get("expected", a.get("value", ""))),
+                "logic": "AND",
+                "is_active": True,
+            })
+
         return {
             "method": str(result.get("method", "GET")).upper(),
             "expected_status": int(result.get("expected_status", status_code)),
             "keyword": result.get("keyword") or None,
             "keyword_present": bool(result.get("keyword_present", True)),
-            "assertions": result.get("assertions") or [],
+            "assertions": normalized,
             "reasoning": str(result.get("reasoning", ""))[:150],
             "actual_status": status_code,
         }
