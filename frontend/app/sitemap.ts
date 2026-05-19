@@ -29,6 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/blog/freshping-alternative`,
+      lastModified: new Date('2026-05-19'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/blog/uptimerobot-alternatives`,
       lastModified: new Date('2026-02-20'),
       changeFrequency: 'monthly',
