@@ -49,7 +49,30 @@
       "Bash(curl -s -X POST https://api-health-monitor-production.up.railway.app/api/v1/alert-channels/ -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3Nzc3OTc4MjEsInR5cGUiOiJhY2Nlc3MifQ.fKgKQF22cHlNvSzKGIzmBnkuVDSgzP56Gh_65ycXZrY' -d '{\"type\":\"webhook\",\"config\":{\"url\":\"http://localhost:8080/secret\"}}')",
       "Bash(curl -s -X POST https://api-health-monitor-production.up.railway.app/api/v1/alert-channels/ -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3Nzc3OTc4MjEsInR5cGUiOiJhY2Nlc3MifQ.fKgKQF22cHlNvSzKGIzmBnkuVDSgzP56Gh_65ycXZrY' -d '{\"type\":\"webhook\",\"config\":{\"url\":\"http://[::1]/secret\"}}')",
       "Bash(curl -s -X POST https://api-health-monitor-production.up.railway.app/api/v1/alert-channels/ -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3Nzc3OTc4MjEsInR5cGUiOiJhY2Nlc3MifQ.fKgKQF22cHlNvSzKGIzmBnkuVDSgzP56Gh_65ycXZrY' -d '{\"type\":\"webhook\",\"config\":{\"url\":\"https://example.com/webhook\"}}')",
-      "Bash(curl -s https://api-health-monitor-production.up.railway.app/health)"
+      "Bash(curl -s https://api-health-monitor-production.up.railway.app/health)",
+      "Bash(railway variables *)",
+      "Bash(npx tsc *)",
+      "Bash(python3 *)",
+      "Bash(curl -s -X POST https://api-health-monitor-production.up.railway.app/api/v1/ai/analyze-endpoint -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54' -d '{\"url\":\"https://api.github.com\"}')",
+      "Bash(python -m json.tool)",
+      "Bash(curl -s -X POST https://api-health-monitor-production.up.railway.app/api/v1/ai/analyze-endpoint -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54' -d '{\"url\":\"https://checkapi.io\"}')",
+      "Bash(curl -s -X POST https://api-health-monitor-production.up.railway.app/api/v1/ai/analyze-endpoint -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54' -d '{\"url\":\"http://localhost:8080\"}')",
+      "Bash(curl -s https://api-health-monitor-production.up.railway.app/api/v1/monitors -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54')",
+      "Bash(python -c ' *)",
+      "Bash(curl -s https://api-health-monitor-production.up.railway.app/api/v1/monitors -H 'Authorization: Bearer __TRACKED_VAR__')",
+      "Bash(curl -s \"https://api-health-monitor-production.up.railway.app/openapi.json\")",
+      "Bash(curl -s https://api-health-monitor-production.up.railway.app/api/v1/monitors/ -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54')",
+      "Bash(curl -s 'https://api-health-monitor-production.up.railway.app/api/v1/monitors/7b5e7e6e-4c56-4714-9a7b-d3d536f02f49/checks?limit=20' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54')",
+      "Bash(pip show *)",
+      "Bash(python -c \"import os; print\\('ANTHROPIC_API_KEY:', 'SET' if os.getenv\\('ANTHROPIC_API_KEY'\\) else 'NOT SET'\\)\")",
+      "Bash(curl -s 'https://api-health-monitor-production.up.railway.app/api/v1/analytics/incidents?limit=10' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54')",
+      "Bash(curl -s -X POST https://api-health-monitor-production.up.railway.app/api/v1/monitors/ -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54' -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s https://api-health-monitor-production.up.railway.app/api/v1/monitors/e2dfd31a-c44e-4d33-af59-90253e69ca9e -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmI2NWQ5ZS1mYjMzLTQ3MmQtOTczMC02NTVjODIwOTBlNjciLCJleHAiOjE3NzgyMDc4NTUsInR5cGUiOiJhY2Nlc3MifQ.gGORXNJJX05j9whiUxmdZUAH-SGPGx8B6GcBL12wB54')",
+      "Bash(railway *)",
+      "Bash(python -m py_compile backend/app/routers/monitors.py backend/app/routers/subscriptions.py backend/app/ai/analyzer.py backend/app/main.py backend/app/routers/public.py backend/app/schemas.py backend/app/tasks.py)",
+      "Bash(python -m py_compile backend/app/routers/monitors.py backend/app/routers/subscriptions.py backend/app/main.py)",
+      "Bash(git pull *)",
+      "Bash(git stash *)"
     ]
   }
 }
