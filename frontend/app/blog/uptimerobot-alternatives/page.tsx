@@ -24,7 +24,7 @@ const faqSchema = {
       name: 'What are the best free UptimeRobot alternatives?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The best free UptimeRobot alternatives in 2026 are CheckAPI (10 monitors, 5-min interval, all alert channels, commercial use allowed), Freshping (50 monitors, 1-min interval), and Better Stack (10 monitors, 3-min interval, status pages).',
+        text: 'The best free UptimeRobot alternatives in 2026 are CheckAPI (5 monitors, 5-min interval, all alert channels including Slack/Telegram/Discord/Webhook, commercial use allowed) and Better Stack (10 monitors, 3-min interval, status pages). Note: Freshping shut down in March 2026.',
       },
     },
     {
@@ -32,7 +32,7 @@ const faqSchema = {
       name: 'How do free monitoring tools compare on commercial use?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'CheckAPI, Freshping, and Better Stack all allow commercial use on their free plans. UptimeRobot restricted commercial use in a recent Terms of Service update, making it unsuitable for business use without a paid plan.',
+        text: 'CheckAPI and Better Stack allow commercial use on their free plans. UptimeRobot restricted commercial use in a Terms of Service update (October 2024), making it unsuitable for business use without a paid plan. Freshping shut down in March 2026.',
       },
     },
     {
@@ -40,7 +40,7 @@ const faqSchema = {
       name: 'Which free UptimeRobot alternative should you choose?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'If you need maximum free monitors, Freshping (50) is hard to beat. If you want a developer-focused experience with multi-channel alerts (Slack, Telegram, Discord) and no commercial restrictions, CheckAPI is the best fit.',
+        text: 'CheckAPI is the best free UptimeRobot alternative for commercial use — it includes all alert channels (Slack, Telegram, Discord, Webhook) on the free plan with no commercial restrictions. Note: Freshping, previously a top alternative, shut down in March 2026.',
       },
     },
   ],
@@ -157,26 +157,18 @@ export default function BlogPost1() {
           </div>
 
           {/* Tool 2 */}
-          <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">2. Freshping</h3>
-            <p className="text-gray-600 dark:text-gray-200 mb-4">
-              Freshping offers 50 free monitors with 1-minute checks, which is genuinely impressive. It's part of the Freshworks ecosystem, so it integrates well if you're already using their products. The downside is that alert channels beyond email require setup within the Freshworks platform.
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: 'Free monitors', value: '50', ok: true },
-                { label: 'Check interval', value: '1 min', ok: true },
-                { label: 'Commercial use', value: 'Allowed', ok: true },
-                { label: 'Slack alerts', value: 'Yes', ok: true },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm">
-                  {item.ok
-                    ? <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    : <XCircle className="h-4 w-4 text-red-400 flex-shrink-0" />}
-                  <span className="text-gray-600 dark:text-gray-200"><span className="font-medium">{item.label}:</span> {item.value}</span>
-                </div>
-              ))}
+          <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm opacity-60">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 line-through">2. Freshping</h3>
+              <span className="bg-red-100 text-red-700 text-sm font-bold px-3 py-1 rounded-full">⛔ Shut Down Mar 2026</span>
             </div>
+            <p className="text-gray-600 dark:text-gray-200 mb-4">
+              Freshping was one of the most generous free monitoring tools — 50 monitors with 1-minute checks. Unfortunately, <strong>Freshworks shut down Freshping in March 2026</strong>. All data will be deleted June 4, 2026.
+            </p>
+            <p className="text-sm text-gray-500">
+              If you were using Freshping, see our guide:{' '}
+              <Link href="/blog/freshping-alternative" className="text-green-600 hover:underline">Best Freshping Alternatives →</Link>
+            </p>
           </div>
 
           {/* Tool 3 */}
@@ -217,7 +209,7 @@ export default function BlogPost1() {
               <tbody className="divide-y divide-gray-100">
                 {[
                   { name: 'CheckAPI', monitors: '10', interval: '5 min', commercial: true },
-                  { name: 'Freshping', monitors: '50', interval: '1 min', commercial: true },
+                  { name: 'Freshping ⛔', monitors: 'Shut down', interval: '—', commercial: false },
                   { name: 'Better Stack', monitors: '10', interval: '3 min', commercial: true },
                   { name: 'UptimeRobot', monitors: '50', interval: '5 min', commercial: false },
                 ].map((row, i) => (

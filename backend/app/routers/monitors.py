@@ -79,7 +79,7 @@ def get_effective_owner(current_user: User, db: Session) -> User:
 
 # Plan limits
 PLAN_LIMITS = {
-    "free":     {"max_monitors": 5,   "min_interval": 300, "history_hours": 720},    # 30 days
+    "free":     {"max_monitors": 5,   "min_interval": 300, "history_hours": 720},    # 30 days (intentionally 5, not 10 — paid conversion strategy)
     "starter":  {"max_monitors": 20,  "min_interval": 60,  "history_hours": 720},    # 30 days
     "pro":      {"max_monitors": 100, "min_interval": 30,  "history_hours": 2160},   # 90 days
     "business": {"max_monitors": -1,  "min_interval": 10,  "history_hours": 8760},   # 365 days
@@ -187,9 +187,10 @@ def get_monitor(
     """
     Get a specific monitor by ID
     """
+    owner_id = get_effective_owner_id(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     
     if not monitor:
@@ -211,23 +212,24 @@ def update_monitor(
     """
     Update a monitor
     """
+    owner = get_effective_owner(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner.id
     ).first()
-    
+
     if not monitor:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Monitor not found"
         )
-    
+
     # Update fields
     update_data = monitor_data.model_dump(exclude_unset=True)
-    
+
     # Validate interval if being updated
     if "interval" in update_data:
-        validate_interval(current_user, update_data["interval"])
+        validate_interval(owner, update_data["interval"])
     
     # Convert URL to string if present
     if "url" in update_data:
@@ -256,9 +258,10 @@ def delete_monitor(
     """
     Delete a monitor
     """
+    owner_id = get_effective_owner_id(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     
     if not monitor:
@@ -291,20 +294,21 @@ def get_monitor_checks(
     """
     Get check history for a monitor
     """
-    # Verify monitor ownership
+    # Verify monitor ownership (team members see owner's monitors)
+    owner = get_effective_owner(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner.id
     ).first()
-    
+
     if not monitor:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Monitor not found"
         )
-    
-    # Apply plan-based history limit
-    limits = PLAN_LIMITS.get(current_user.plan, PLAN_LIMITS["free"])
+
+    # Apply plan-based history limit (use owner's plan for team members)
+    limits = PLAN_LIMITS.get(owner.plan, PLAN_LIMITS["free"])
     max_hours = limits["history_hours"]
     if hours is None or hours > max_hours:
         hours = max_hours
@@ -352,9 +356,10 @@ def toggle_monitor(
     current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db)
 ):
+    owner_id = get_effective_owner_id(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
 
     if not monitor:
@@ -379,9 +384,10 @@ def pause_monitor(
     """
     Pause a monitor (set is_active to False)
     """
+    owner_id = get_effective_owner_id(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     
     if not monitor:
@@ -407,9 +413,10 @@ def resume_monitor(
     """
     Resume a paused monitor (set is_active to True)
     """
+    owner_id = get_effective_owner_id(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     
     if not monitor:
@@ -468,14 +475,4 @@ def set_custom_domain(
 def get_custom_domain(
     monitor_id: str,
     current_user: User = Depends(get_current_user_flexible),
-    db: Session = Depends(get_db)
-):
-    """Get the custom domain setting for a monitor."""
-    owner = get_effective_owner(current_user, db)
-    monitor = db.query(Monitor).filter(
-        Monitor.id == monitor_id,
-        Monitor.user_id == owner.id
-    ).first()
-    if not monitor:
-        raise HTTPException(status_code=404, detail="Monitor not found")
-    return {"custom_domain": monitor.custom_domain}
+    db:

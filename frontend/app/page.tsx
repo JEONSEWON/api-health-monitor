@@ -266,7 +266,11 @@ export default function HomePage() {
             </a>
           </div>
 
-          <p style={{ fontSize: '13px', color: '#475569' }}>No credit card required · 5-minute setup · 5 monitors free</p>
+          <p style={{ fontSize: '13px', color: '#475569' }}>No credit card required · 5-minute setup · 5 monitors free · Commercial use allowed</p>
+          <p style={{ fontSize: '12px', color: '#374151', marginTop: '6px' }}>
+            <span style={{ color: '#f87171' }}>⛔ Freshping shut down?</span>
+            {' '}<a href="/blog/freshping-alternative" style={{ color: '#00e5b4', textDecoration: 'none', fontWeight: 600 }}>Migrate in 5 minutes →</a>
+          </p>
 
           {/* Dashboard mockup */}
           <div className="glass-card" style={{ marginTop: '64px', overflow: 'hidden', maxWidth: '820px', margin: '64px auto 0' }}>
@@ -331,9 +335,10 @@ export default function HomePage() {
           {/* Banner header */}
           <div style={{ background: 'rgba(0,229,180,0.06)', borderBottom: '1px solid rgba(0,229,180,0.12)', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: '#00e5b4' }}>Why teams switch from UptimeRobot</span>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: '#00e5b4' }}>Why teams switch to CheckAPI</span>
               <span style={{ fontSize: '11px', color: '#64748b' }}>Free plan comparison</span>
-              <span style={{ fontSize: '11px', background: 'rgba(248,113,113,0.15)', color: '#f87171', border: '1px solid rgba(248,113,113,0.3)', padding: '2px 8px', borderRadius: '999px' }}>UptimeRobot restricted commercial use in Oct 2024</span>
+              <span style={{ fontSize: '11px', background: 'rgba(248,113,113,0.15)', color: '#f87171', border: '1px solid rgba(248,113,113,0.3)', padding: '2px 8px', borderRadius: '999px' }}>UptimeRobot: no commercial use (free)</span>
+              <span style={{ fontSize: '11px', background: 'rgba(239,68,68,0.15)', color: '#fca5a5', border: '1px solid rgba(239,68,68,0.3)', padding: '2px 8px', borderRadius: '999px' }}>⛔ Freshping shut down Mar 2026</span>
             </div>
             <Link href="/register" style={{ fontSize: '12px', color: '#00e5b4', textDecoration: 'none', fontWeight: 600 }}>Switch now →</Link>
           </div>

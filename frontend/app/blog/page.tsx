@@ -4,6 +4,14 @@ import { ArrowRight, Calendar, Clock } from 'lucide-react';
 
 const posts = [
   {
+    title: 'Freshping Shut Down: Best Free Alternatives in 2026',
+    excerpt: 'Freshworks shut down Freshping in March 2026. All data deletes June 4. Here are the best free alternatives — migrate in 5 minutes.',
+    date: 'May 18, 2026',
+    readTime: '5 min read',
+    slug: '/blog/freshping-alternative',
+    badge: '🔴 Urgent',
+  },
+  {
     title: 'API Uptime Checker: Track Availability, SLA & Uptime Percentage',
     excerpt: '99.9% uptime sounds reliable — until you realize it allows 8.7 hours of downtime every year. Learn how to measure your real uptime %, track SLA compliance, and share it with customers.',
     date: 'May 1, 2026',
@@ -117,10 +125,13 @@ export default function BlogPage() {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24">
         <div className="space-y-6">
           {posts.map((post, i) => (
-            <article key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 hover:border-green-300 hover:shadow-lg transition">
+            <article key={i} className={`bg-white dark:bg-gray-800 rounded-xl border p-8 hover:shadow-lg transition ${'badge' in post ? 'border-red-300 dark:border-red-700 hover:border-red-400' : 'border-gray-200 dark:border-gray-700 hover:border-green-300'}`}>
               <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
                 <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{post.date}</span>
                 <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{post.readTime}</span>
+                {'badge' in post && post.badge && (
+                  <span className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 text-xs font-bold px-2 py-0.5 rounded-full">{post.badge}</span>
+                )}
               </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 hover:text-green-600 transition">
                 <Link href={post.slug}>{post.title}</Link>
