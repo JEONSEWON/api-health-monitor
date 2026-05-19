@@ -17,6 +17,7 @@ from app.schemas import (
     MessageResponse
 )
 from app.auth import get_current_user
+from app.routers.monitors import get_effective_owner_id
 
 router = APIRouter(prefix="/alert-channels", tags=["Alert Channels"])
 
@@ -272,13 +273,14 @@ def attach_channel_to_monitor(
     db: Session = Depends(get_db)
 ):
     """Attach an alert channel to a monitor"""
+    owner_id = get_effective_owner_id(current_user, db)
     channel = db.query(AlertChannel).filter(
         AlertChannel.id == channel_id,
-        AlertChannel.user_id == current_user.id
+        AlertChannel.user_id == owner_id
     ).first()
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     if not channel:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Alert channel not found")
@@ -298,13 +300,14 @@ def detach_channel_from_monitor(
     db: Session = Depends(get_db)
 ):
     """Detach an alert channel from a monitor"""
+    owner_id = get_effective_owner_id(current_user, db)
     channel = db.query(AlertChannel).filter(
         AlertChannel.id == channel_id,
-        AlertChannel.user_id == current_user.id
+        AlertChannel.user_id == owner_id
     ).first()
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     if not channel:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Alert channel not found")
