@@ -246,9 +246,18 @@ def check_single_monitor(monitor_id: str):
 
         db.commit()
 
-        # AI analysis for failed/degraded checks
+        # Alert logic:
+        # - Recovery (any → up): always alert immediately, reset alert_sent flag
+        # - Failure: alert only when threshold is first reached AND no alert sent yet for this incident
         ai_analysis = None
-        if status in ("down", "degraded"):
+        if status == "up" and previous_status and previous_status != "up":
+            print(f"Recovery: {previous_status} -> up")
+            monitor.alert_sent = False
+            db.commit()
+            send_alerts.delay(str(monitor.id), status, previous_status)
+        elif status != "up" and monitor.consecutive_failures >= threshold and not monitor.alert_sent:
+            print(f"Threshold reached ({threshold}): {previous_status} -> {status}")
+            # AI analysis only at alert time (not every failed check)
             from app.ai.analyzer import analyze_incident
             ai_analysis = analyze_incident(
                 monitor_name=monitor.name,
@@ -260,18 +269,6 @@ def check_single_monitor(monitor_id: str):
             )
             if ai_analysis:
                 check.ai_analysis = ai_analysis
-                db.commit()
-
-        # Alert logic:
-        # - Recovery (any → up): always alert immediately, reset alert_sent flag
-        # - Failure: alert only when threshold is first reached AND no alert sent yet for this incident
-        if status == "up" and previous_status and previous_status != "up":
-            print(f"Recovery: {previous_status} -> up")
-            monitor.alert_sent = False
-            db.commit()
-            send_alerts.delay(str(monitor.id), status, previous_status)
-        elif status != "up" and monitor.consecutive_failures >= threshold and not monitor.alert_sent:
-            print(f"Threshold reached ({threshold}): {previous_status} -> {status}")
             monitor.alert_sent = True
             db.commit()
             send_alerts.delay(str(monitor.id), status, previous_status or status, ai_analysis)
