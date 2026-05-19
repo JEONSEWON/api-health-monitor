@@ -326,15 +326,17 @@ def get_sla_report(
         monthly_stats = []
 
         for month_offset in range(months - 1, -1, -1):
-            # 월 시작/끝 계산
             now = datetime.utcnow()
-            first_of_month = (now.replace(day=1) - timedelta(days=month_offset * 30)).replace(
-                day=1, hour=0, minute=0, second=0, microsecond=0
-            )
-            if first_of_month.month == 12:
-                last_of_month = first_of_month.replace(year=first_of_month.year + 1, month=1) - timedelta(seconds=1)
+            year = now.year
+            month = now.month - month_offset
+            while month <= 0:
+                month += 12
+                year -= 1
+            first_of_month = datetime(year, month, 1, 0, 0, 0)
+            if month == 12:
+                last_of_month = datetime(year + 1, 1, 1) - timedelta(seconds=1)
             else:
-                last_of_month = first_of_month.replace(month=first_of_month.month + 1) - timedelta(seconds=1)
+                last_of_month = datetime(year, month + 1, 1) - timedelta(seconds=1)
 
             checks = db.query(Check).filter(
                 Check.monitor_id == monitor.id,
