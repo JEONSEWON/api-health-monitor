@@ -139,7 +139,7 @@ def send_welcome_email(user_email: str, user_name: str) -> bool:
                     </div>
 
                     <p style="color: #9ca3af; font-size: 13px; text-align: center; margin: 0;">
-                        Free plan includes 10 monitors, all 5 alert channels, and no commercial restrictions.
+                        Free plan includes 5 monitors, all 5 alert channels, and no commercial restrictions.
                     </p>
                 </div>
                 <div style="background: #f9fafb; padding: 16px 24px; text-align: center; border-top: 1px solid #e5e7eb;">
