@@ -146,30 +146,29 @@ def get_public_status(request: Request, monitor_id: str, db: Session = Depends(g
     # Get current status
     current_status = monitor.last_status or "unknown"
     
-    # Get last 90 days of daily uptime (for chart)
+    # Get last 90 days of daily uptime (for chart) — single query
+    window_start = (datetime.utcnow() - timedelta(days=90)).replace(hour=0, minute=0, second=0, microsecond=0)
+    all_checks = db.query(Check.checked_at, Check.status).filter(
+        Check.monitor_id == monitor.id,
+        Check.checked_at >= window_start,
+    ).all()
+
+    # Group by date string
+    by_date: Dict[str, list] = {}
+    for checked_at, s in all_checks:
+        key = checked_at.strftime("%Y-%m-%d")
+        by_date.setdefault(key, []).append(s)
+
     daily_stats = []
     for days_ago in range(90, -1, -1):
-        date = datetime.utcnow() - timedelta(days=days_ago)
-        date_start = date.replace(hour=0, minute=0, second=0, microsecond=0)
-        date_end = date_start + timedelta(days=1)
-        
-        # Get checks for this day
-        day_checks = db.query(Check).filter(
-            Check.monitor_id == monitor.id,
-            Check.checked_at >= date_start,
-            Check.checked_at < date_end
-        ).all()
-        
-        if day_checks:
-            up_count = sum(1 for c in day_checks if c.status == "up")
-            uptime = round((up_count / len(day_checks)) * 100, 1)
+        date_start = (datetime.utcnow() - timedelta(days=days_ago)).replace(hour=0, minute=0, second=0, microsecond=0)
+        key = date_start.strftime("%Y-%m-%d")
+        day_statuses = by_date.get(key, [])
+        if day_statuses:
+            uptime = round((sum(1 for s in day_statuses if s == "up") / len(day_statuses)) * 100, 1)
         else:
-            uptime = None  # No data
-        
-        daily_stats.append({
-            "date": date_start.strftime("%Y-%m-%d"),
-            "uptime": uptime
-        })
+            uptime = None
+        daily_stats.append({"date": key, "uptime": uptime})
     
     return {
         "monitor": {
