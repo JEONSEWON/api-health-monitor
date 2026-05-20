@@ -104,7 +104,8 @@ def get_public_stats(db: Session = Depends(get_db)):
     """
     # 모니터를 1개 이상 가진 활성 유저 수
     active_users = db.query(User).filter(
-        User.is_active == True
+        User.is_active == True,
+        db.query(Monitor).filter(Monitor.user_id == User.id).exists()
     ).count()
 
     # 전체 모니터 수

@@ -12,6 +12,7 @@ from uuid import UUID
 from app.database import get_db
 from app.models import User, Monitor, Check
 from app.auth import get_current_user
+from app.routers.teams import get_effective_user_id
 
 # Max data retention days per plan (must match tasks.py RETENTION_DAYS)
 PLAN_RETENTION_DAYS = {
@@ -32,8 +33,8 @@ def get_overview(
     """
     Get analytics overview for all user's monitors
     """
-    # Get all user's monitors
-    monitors = db.query(Monitor).filter(Monitor.user_id == current_user.id).all()
+    owner_id = get_effective_user_id(current_user, db)
+    monitors = db.query(Monitor).filter(Monitor.user_id == owner_id).all()
     
     if not monitors:
         return {
@@ -98,10 +99,10 @@ def get_monitor_analytics(
     max_days = PLAN_RETENTION_DAYS.get(current_user.plan, 7)
     days = min(days, max_days)
 
-    # Verify ownership
+    owner_id = get_effective_user_id(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     
     if not monitor:
@@ -223,8 +224,8 @@ def get_all_incidents(
     """
     Get all incidents across all user's monitors
     """
-    # Get all user's monitors
-    monitor_ids = [m.id for m in db.query(Monitor).filter(Monitor.user_id == current_user.id).all()]
+    owner_id = get_effective_user_id(current_user, db)
+    monitor_ids = [m.id for m in db.query(Monitor).filter(Monitor.user_id == owner_id).all()]
     
     if not monitor_ids:
         return {"incidents": []}
@@ -315,8 +316,9 @@ def get_sla_report(
             detail="SLA reports are available on Pro and Business plans"
         )
 
+    owner_id = get_effective_user_id(current_user, db)
     monitors = db.query(Monitor).filter(
-        Monitor.user_id == current_user.id,
+        Monitor.user_id == owner_id,
         Monitor.is_active == True
     ).all()
 
@@ -423,9 +425,10 @@ def get_response_time_percentiles(
     from datetime import timedelta
     import statistics
 
+    owner_id = get_effective_user_id(current_user, db)
     monitor = db.query(Monitor).filter(
         Monitor.id == monitor_id,
-        Monitor.user_id == current_user.id
+        Monitor.user_id == owner_id
     ).first()
     if not monitor:
         raise HTTPException(status_code=404, detail="Monitor not found")

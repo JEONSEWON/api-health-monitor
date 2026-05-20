@@ -329,7 +329,10 @@ def is_in_maintenance(monitor, db) -> bool:
             return True
         elif window.repeat_type == "once":
             if window.start_date and window.end_date:
-                if window.start_date <= now_utc <= window.end_date:
+                now_aware = datetime.now(timezone.utc)
+                start = window.start_date if window.start_date.tzinfo else window.start_date.replace(tzinfo=timezone.utc)
+                end = window.end_date if window.end_date.tzinfo else window.end_date.replace(tzinfo=timezone.utc)
+                if start <= now_aware <= end:
                     return True
 
     return False

@@ -92,7 +92,7 @@ def invite_member(
 
     # Pro: max 5 members, Business: unlimited
     if current_user.plan == "pro":
-        count = db.query(TeamMember).filter(TeamMember.owner_id == current_user.id, TeamMember.status == "accepted").count()
+        count = db.query(TeamMember).filter(TeamMember.owner_id == current_user.id, TeamMember.status == "active").count()
         if count >= 5:
             raise HTTPException(status_code=400, detail="Pro plan allows up to 5 team members.")
 
